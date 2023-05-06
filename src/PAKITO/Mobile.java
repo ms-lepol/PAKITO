@@ -1,5 +1,5 @@
 package PAKITO;
 
-public class Mobile extends Piece {
+abstract class Mobile extends Piece {
     
 }
