@@ -1,6 +1,15 @@
 package PAKITO;
 
 class Mobile extends Piece {
+
+    /*
+     * Calcule la position de la piece mobile actuelle 
+     * si elle se deplace dans la direction donnée
+     * 
+     * @param int dir       la direction voulue
+     * 
+     * @return Position     la position hypothetyque de la piece
+     */
     public Position getNextPos(int dir){
         int row = 0; 
         int col = 0;
@@ -34,11 +43,20 @@ class Mobile extends Piece {
                 col =  1;
                 break;
             default:
+                // Erreur dans la direction donnée
                 return new Position(-1, -1);
         }
         return new Position(this.pos.getCol()+col, this.pos.getRow()+row);
     }
-    public boolean moveTo(int dir){
+
+    /*
+     * Déplace la pièce actuelle dans la direction voulue
+     * 
+     * @param int dir      la direction voulue
+     * 
+     * @return Boolean     la réussite ou l'échec du déplacement
+     */
+    public Boolean moveTo(int dir){
         Position res = getNextPos(dir);
         if(!res.isValid()){
             return false;

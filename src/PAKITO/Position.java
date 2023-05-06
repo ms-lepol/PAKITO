@@ -24,6 +24,12 @@ class Position {
         return this.row;
     }
 
+    /*
+     * Informe de la validité de la position dans la grille
+     * 
+     * @return Boolean     true si la piece est dans la grille
+     *                     false sinon
+     */
     public Boolean isValid(){
         if(row < 0 || row > MAX_HEIGHT || col < 0 || col > MAX_WIDTH){
             return false;
