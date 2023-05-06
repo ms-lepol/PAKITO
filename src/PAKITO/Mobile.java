@@ -1,6 +1,6 @@
 package PAKITO;
 
-class Mobile extends Piece {
+public class Mobile extends Piece {
 
     /*
      * Calcule la position de la piece mobile actuelle 
