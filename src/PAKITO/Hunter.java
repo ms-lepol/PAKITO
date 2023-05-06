@@ -1,5 +1,9 @@
 package PAKITO;
 
-public class Chasseur extends Mobile {
-    
+public class Hunter extends Mobile {
+    public Hunter() {
+        // Position random ?
+        pos = new Position();
+        str = 'H';
+    }
 }

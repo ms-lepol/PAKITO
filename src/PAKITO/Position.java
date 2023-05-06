@@ -11,14 +11,18 @@ class Position {
         this.row = row;
     }
 
-    /*public Position getNextPos(int dir){
-        Position res = new Position(0, 0);
-        switch (dir){
-            case 1:
-                break;
-        }
-        return res;
-    } */
+    public Position(){
+        this.col = 0;
+        this.row = 0;
+    }
+
+    public int getCol(){
+        return this.col;
+    }
+
+    public int getRow(){
+        return this.row;
+    }
 
     public Boolean isValid(){
         if(row < 0 || row > MAX_HEIGHT || col < 0 || col > MAX_WIDTH){
