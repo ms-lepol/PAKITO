@@ -47,7 +47,7 @@ public class Movement {
                 // Erreur dans la direction donnée
                 return new Position(-1, -1);
         }
-        return new Position(pos.getCol()+col, pos.getRow()+row);
+        return new Position(pos.getRow()+row, pos.getCol()+col);
     }
 
     /*

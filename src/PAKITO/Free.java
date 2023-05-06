@@ -1,8 +1,7 @@
 package PAKITO;
 
 public class Free extends Piece {
-    
     public Free(){
-        str = '.';
+        setStr('\u00B7');
     }
 }

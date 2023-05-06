@@ -1,7 +1,9 @@
-package PAKITO;
+package PAKITO.Piece_Fixed;
+
+import PAKITO.Fixed;
 
 public class Treasure extends Fixed {
     public Treasure() {
-        str = 'X';
+        setStr('X');
     }
 }

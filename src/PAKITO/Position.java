@@ -1,12 +1,12 @@
 package PAKITO;
 
 class Position {
-    static final int MAX_WIDTH = 200;
-    static final int MAX_HEIGHT = 200;
+    static final int MAX_WIDTH = 20;
+    static final int MAX_HEIGHT = 10;
     private int row;
     private int col;
 
-    public Position(int col, int row){
+    public Position(int row, int col){
         this.col = col;
         this.row = row;
     }
