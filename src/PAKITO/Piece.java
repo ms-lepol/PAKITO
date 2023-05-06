@@ -1,6 +1,10 @@
 package PAKITO;
 
 abstract class Piece {
-	Position pos;
     char str;
+
+    @Override
+    public String toString() {
+        return ""+str;
+    }
 }
