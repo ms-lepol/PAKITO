@@ -2,6 +2,17 @@ package PAKITO;
 
 // Regroupement de fonctions de mouvement
 public class Movement {
+
+    /*
+     * Donne une direction aleatoire
+     * 
+     * @return int  la direction 
+     * 
+     */
+    public int getRandDir(){
+        return (int)(1+Math.random()*7);
+    }
+
     /*
      * Calcule la nouvelle position d'un déplacement
      * dans une direction donnée 
@@ -11,7 +22,7 @@ public class Movement {
      * 
      * @return Position     la position hypothetyque de la piece
      */
-    public Position getNextPos(Position pos, int dir){
+    public Position getNextPos(Position curr, int dir){
         int row = 0; 
         int col = 0;
         switch (dir){
@@ -47,7 +58,7 @@ public class Movement {
                 // Erreur dans la direction donnée
                 return new Position(-1, -1);
         }
-        return new Position(pos.getRow()+row, pos.getCol()+col);
+        return new Position(curr.getRow()+row, curr.getCol()+col);
     }
 
     /*

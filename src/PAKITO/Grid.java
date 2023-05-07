@@ -1,17 +1,35 @@
 package PAKITO;
 import java.util.*;
 
-import PAKITO.Piece_Fixed.Border;
+import PAKITO.Piece_Fixed.*;
+import PAKITO.Piece_Mobile.*;
 
 public class Grid {
 	Map<Position,List<Piece>> Grid;
 
 	public Grid(){
 		Grid = new LinkedHashMap<Position,List<Piece>>();
-		initGrid();
+		initEmptyGrid();
+
+		List<Piece> li = new LinkedList<>();
+		for(int i = 0; i<5; i++){
+			li.add(new Border('\u25A0'));
+		}
+		li.add(new Hunter());
+		li.add(new Hunter());
+		li.add(new Tool());
+		li.add(new Stone());
+		li.add(new Treasure());
+		li.add(new Glue());
+
+		initPieces(li);
 	}
 
-	public void initGrid(){
+	/*
+    * Initialise une grille vide avec des bordures 
+    * 
+    */
+	public void initEmptyGrid(){
 		for(int row = 0; row < Position.MAX_HEIGHT; row++){
 			for(int col = 0; col < Position.MAX_WIDTH; col++){
 				List<Piece> li = new ArrayList<Piece>();
@@ -40,6 +58,41 @@ public class Grid {
 				Grid.put(new Position(row, col), li);
 			}
 		} 
+	}
+
+	/*
+    * Place une piece au hasard dans la grille
+	*
+	* @param Piece p  La piece a placer
+    * 
+    */
+	public void initPiece(Piece p){
+		boolean isPlaced = false;
+		while(!isPlaced){
+			Position rPos = Position.randPos();
+			for (Position key : Grid.keySet()){
+				if(key.equals(rPos)){
+					if(Grid.get(key).get(0) instanceof Free){
+						// La case est libre
+						Grid.get(key).clear();
+						Grid.get(key).add(p);
+						isPlaced = true;
+					}
+				}
+			}
+		}
+	}
+
+	/*
+    * Place plusieurs pieces au hasard dans la grille
+	*
+	* @param Piece p  La piece a placer
+    * 
+    */
+	public void initPieces(List<Piece> li){
+		for(Piece p : li){
+			initPiece(p);
+		}
 	}
 
 	@Override
