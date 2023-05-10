@@ -61,20 +61,4 @@ public class Movement {
         return new Position(curr.getRow()+row, curr.getCol()+col);
     }
 
-    /*
-     * Déplace la pièce actuelle dans la direction voulue
-     * 
-     * @param Position pos la position de base
-     * @param int dir      la direction voulue
-     * 
-     * @return Boolean     la réussite ou l'échec du déplacement
-     */
-    public Boolean moveTo(Position pos, int dir){
-        Position res = getNextPos(pos, dir);
-        if(!res.isValid()){
-            return false;
-        }
-        pos = res;
-        return true;
-    }
 }
