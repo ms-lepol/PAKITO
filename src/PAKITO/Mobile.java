@@ -1,6 +1,6 @@
 package PAKITO;
 
-abstract class Mobile extends Piece {
+abstract class Mobile extends Piece implements Moveable{
     int dir;
 
     /*

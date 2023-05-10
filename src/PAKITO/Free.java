@@ -5,4 +5,9 @@ public class Free extends Fixed {
         //setStr('\u00B7');
         setStr(' ');
     }
+
+    @Override
+    public void process(Hunter h) {
+        
+    }
 }
