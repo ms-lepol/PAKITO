@@ -1,5 +1,5 @@
 package PAKITO;
 
-public class Fixed extends Piece {
+abstract class Fixed extends Piece {
     
 }

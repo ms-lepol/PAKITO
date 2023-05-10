@@ -1,6 +1,4 @@
-package PAKITO.Piece_Mobile;
-
-import PAKITO.Mobile;
+package PAKITO;
 
 public class Hunter extends Mobile {
     public Hunter() {

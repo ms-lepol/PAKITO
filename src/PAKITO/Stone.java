@@ -1,6 +1,4 @@
-package PAKITO.Piece_Fixed;
-
-import PAKITO.Fixed;
+package PAKITO;
 
 public class Stone extends Fixed {
     public Stone() {

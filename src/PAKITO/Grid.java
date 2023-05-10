@@ -1,9 +1,6 @@
 package PAKITO;
 import java.util.*;
 
-import PAKITO.Piece_Fixed.*;
-import PAKITO.Piece_Mobile.*;
-
 public class Grid {
 	Map<Position,List<Piece>> Grid;
 
