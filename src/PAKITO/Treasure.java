@@ -7,6 +7,6 @@ public class Treasure extends Fixed {
 
     @Override
     public void process(Hunter h) {
-        
+        h.setTreasure_found(true);
     }
 }

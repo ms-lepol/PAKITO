@@ -7,6 +7,6 @@ public class RoadMap extends Fixed{
 
     @Override
     public void process(Hunter h) {
-        
+        // Besoin de la direction du trésor
     }
 }

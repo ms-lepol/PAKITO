@@ -7,6 +7,6 @@ public class Glue extends Fixed {
 
     @Override
     public void process(Hunter h) {
-        
+        h.setWait_time(2);
     }
 }
