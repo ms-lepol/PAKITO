@@ -10,7 +10,7 @@ public class Grid {
 
 		List<Piece> li = new LinkedList<>();
 		for(int i = 0; i<5; i++){
-			li.add(new Border('\u25A0'));
+			li.add(new Wall());
 		}
 		li.add(new Hunter());
 		li.add(new Hunter());
@@ -90,6 +90,10 @@ public class Grid {
 		for(Piece p : li){
 			initPiece(p);
 		}
+	}
+
+	public void update(){
+		
 	}
 
 	@Override
