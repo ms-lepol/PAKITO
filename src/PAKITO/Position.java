@@ -1,6 +1,6 @@
 package PAKITO;
 
-class Position {
+class Position implements Comparable{
     static final int MAX_WIDTH = 20;
     static final int MAX_HEIGHT = 10;
     private int row;
@@ -66,7 +66,14 @@ class Position {
         }
         return false;
     }
-
+    @Override
+    public int compareTo(Position other){
+        if (this.equals(other)) return 0;
+        if (this.row<other.getRow()) return -1;
+        if (this.row==other.getRow()&&this.col<other.getCol()) return -1;
+        return 1;
+    }
+    
     @Override
     public String toString() {
         return "row : "+row+", col : "+col;

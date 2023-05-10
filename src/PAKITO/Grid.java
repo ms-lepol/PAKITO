@@ -1,6 +1,8 @@
 package PAKITO;
 import java.util.*;
 
+import javax.swing.text.Position;
+
 public class Grid {
 	Map<Position,List<Piece>> Grid;
 
@@ -72,7 +74,7 @@ public class Grid {
 					if(Grid.get(key).get(0) instanceof Free){
 						// La case est libre
 						Grid.get(key).clear();
-						Grid.get(key).add(p);
+						Grid.get(key).addLast(p);
 						isPlaced = true;
 					}
 				}
@@ -93,9 +95,17 @@ public class Grid {
 	}
 
 	public void movePiece(Position pos){
-		
+		Piece currPiece = getPiece(pos);
+		if (currPiece!=null){
+			
+		}
 	}
 
+	public Piece getPiece(Position pos){
+		if (this.Grid.containsKey(pos)){
+			return this.Grid.get(pos).getLast();
+		}
+	}
 	public void update(){
 
 	}
