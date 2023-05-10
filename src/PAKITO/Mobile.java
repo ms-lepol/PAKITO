@@ -1,6 +1,7 @@
 package PAKITO;
 
 abstract class Mobile extends Piece {
+    int dir;
 
     /*
      * Donne une direction aleatoire

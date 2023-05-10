@@ -92,8 +92,12 @@ public class Grid {
 		}
 	}
 
-	public void update(){
+	public void movePiece(Position pos){
 		
+	}
+
+	public void update(){
+
 	}
 
 	@Override
