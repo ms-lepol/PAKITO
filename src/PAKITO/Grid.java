@@ -1,8 +1,6 @@
 package PAKITO;
 import java.util.*;
 
-import javax.swing.text.Position;
-
 public class Grid {
 	Map<Position,List<Piece>> Grid;
 

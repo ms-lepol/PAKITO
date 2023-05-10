@@ -66,8 +66,15 @@ class Position implements Comparable{
         }
         return false;
     }
+
     @Override
-    public int compareTo(Position other){
+    public int compareTo(Object o){
+        Position other = new Position(-1,-1);
+        if(o instanceof Position){
+            other = (Position)o;
+        }else{
+            return -1;
+        }
         if (this.equals(other)) return 0;
         if (this.row<other.getRow()) return -1;
         if (this.row==other.getRow()&&this.col<other.getCol()) return -1;
