@@ -2,20 +2,19 @@ package PAKITO;
 import java.util.*;
 
 public class Grid {
-	Map<Position,List<Piece>> Grid;
+	Map<Position,LinkedList<Piece>> Grid;
 
 	public Grid(){
-		Grid = new LinkedHashMap<Position,List<Piece>>();
+		Grid = new HashMap<Position,LinkedList<Piece>>();
 		initEmptyGrid();
 
-		List<Piece> li = new LinkedList<>();
+		List<Piece> li = new ArrayList<>();
 		for(int i = 0; i<5; i++){
-			li.add(new Wall());
+			li.add(new Stone());
 		}
 		li.add(new Hunter());
 		li.add(new Hunter());
 		li.add(new Tool());
-		li.add(new Stone());
 		li.add(new Treasure());
 		li.add(new Glue());
 
@@ -27,32 +26,37 @@ public class Grid {
     * 
     */
 	public void initEmptyGrid(){
+
 		for(int row = 0; row < Position.MAX_HEIGHT; row++){
 			for(int col = 0; col < Position.MAX_WIDTH; col++){
-				List<Piece> li = new ArrayList<Piece>();
+
+				LinkedList<Piece> li = new LinkedList<Piece>();
 				if(row == 0 && col == 0){ 
 					// Haut Gauche
 					li.add(new Border('\u250C'));
+					Grid.put((new Position(row, col)), li);
 				}else if(row == 0 && col == Position.MAX_WIDTH - 1){ 
 					// Haut Droite
 					li.add(new Border('\u2510'));
+					Grid.put((new Position(row, col)), li);
 				}else if(row == Position.MAX_HEIGHT - 1 && col == 0){ 
 					// Bas Gauche
 					li.add(new Border('\u2514'));
+					Grid.put((new Position(row, col)), li);
 				}else if(row == Position.MAX_HEIGHT - 1 && col == Position.MAX_WIDTH - 1){ 
 					// Bas Droite
 					li.add(new Border('\u2518'));
+					Grid.put((new Position(row, col)), li);
 				}else if(row == 0 || row == Position.MAX_HEIGHT - 1){
 					// Bas ou Haut
 					li.add(new Border('\u2500'));
+					Grid.put((new Position(row, col)), li);
 				}else if(col == 0 || col == Position.MAX_WIDTH - 1){
 					// Gauche ou Droite
 					li.add(new Border('\u2502'));
-				}else{
-					// Autre
-					li.add(new Free());
+					Grid.put((new Position(row, col)), li);
 				}
-				Grid.put(new Position(row, col), li);
+				
 			}
 		} 
 	}
@@ -67,15 +71,12 @@ public class Grid {
 		boolean isPlaced = false;
 		while(!isPlaced){
 			Position rPos = Position.randPos();
-			for (Position key : Grid.keySet()){
-				if(key.equals(rPos)){
-					if(Grid.get(key).get(0) instanceof Free){
-						// La case est libre
-						Grid.get(key).clear();
-						Grid.get(key).addLast(p);
-						isPlaced = true;
-					}
-				}
+			Piece currP = getPiece(rPos);
+			if(currP == null){
+				LinkedList<Piece> li = new LinkedList<Piece>();
+				li.add(p);
+				Grid.put(rPos, li);
+				isPlaced = true;
 			}
 		}
 	}
@@ -100,9 +101,12 @@ public class Grid {
 	}
 
 	public Piece getPiece(Position pos){
-		if (this.Grid.containsKey(pos)){
-			return this.Grid.get(pos).getLast();
+		for(Position key : Grid.keySet()){
+			if(key.equals(pos)){
+				return this.Grid.get(key).getLast();
+			}
 		}
+		return null;
 	}
 	public void update(){
 
@@ -111,10 +115,20 @@ public class Grid {
 	@Override
 	public String toString() {
 		String str = "";
-		for (Position key : Grid.keySet()){
-			str += Grid.get(key).get(0).toString();
-			if(key.getCol() == Position.MAX_WIDTH - 1){
-				str += "\n";
+		for (int row = 0; row < Position.MAX_HEIGHT; row++){
+			for (int col = 0; col < Position.MAX_WIDTH; col++){
+				Position pos = new Position(row, col);
+				Piece piece = getPiece(pos);
+				if(piece != null){
+					str += piece.toString();
+				}else{
+					str += " ";
+				}
+				
+				if(pos.getCol() == Position.MAX_WIDTH - 1){
+					str += "\n";
+				}
+				
 			}
 		}
 		return str;

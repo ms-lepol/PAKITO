@@ -1,6 +1,6 @@
 package PAKITO;
 
-class Position implements Comparable{
+class Position implements Comparable<Position>{
     static final int MAX_WIDTH = 20;
     static final int MAX_HEIGHT = 10;
     private int row;
@@ -68,16 +68,10 @@ class Position implements Comparable{
     }
 
     @Override
-    public int compareTo(Object o){
-        Position other = new Position(-1,-1);
-        if(o instanceof Position){
-            other = (Position)o;
-        }else{
-            return -1;
-        }
-        if (this.equals(other)) return 0;
-        if (this.row<other.getRow()) return -1;
-        if (this.row==other.getRow()&&this.col<other.getCol()) return -1;
+    public int compareTo(Position o){
+        if (this.equals(o)) return 0;
+        if (this.row<o.getRow()) return -1;
+        if (this.row==o.getRow()&&this.col<o.getCol()) return -1;
         return 1;
     }
     
