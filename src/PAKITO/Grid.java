@@ -1,5 +1,6 @@
 package PAKITO;
 import java.util.*;
+import java.util.concurrent.ConcurrentHashMap;
 
 public class Grid {
 	Map<Position,LinkedList<Piece>> Grid;
@@ -73,6 +74,7 @@ public class Grid {
 			Position rPos = Position.randPos();
 			Piece currP = getPiece(rPos);
 			if(currP == null){
+				// Case libre
 				LinkedList<Piece> li = new LinkedList<Piece>();
 				li.add(p);
 				Grid.put(rPos, li);
@@ -93,13 +95,9 @@ public class Grid {
 		}
 	}
 
-	public void movePiece(Position pos){
-		Piece currPiece = getPiece(pos);
-		if (currPiece!=null){
-			
-		}
-	}
-
+	/*
+	 * Position quelconque
+	*/
 	public Piece getPiece(Position pos){
 		for(Position key : Grid.keySet()){
 			if(key.equals(pos)){
@@ -108,8 +106,33 @@ public class Grid {
 		}
 		return null;
 	}
-	public void update(){
 
+	/*
+	 * Piece connue !!! (car on utilise son adresse mémoire)
+	*/
+	public Position getPos(Piece p){
+		for (Map.Entry<Position, LinkedList<Piece>> entry : Grid.entrySet()) {
+			if (Objects.equals(p, entry.getValue().getLast())){
+				return entry.getKey();
+			}
+		}
+		return null;
+	}
+	
+	public void update(){
+		List<Mobile> moveList = new ArrayList<Mobile>();
+
+		for (Position key : Grid.keySet()) {
+			Piece p = getPiece(key);
+			if(p == null || !(p instanceof Mobile)){
+				continue;
+			}
+			moveList.add((Mobile)p);
+		}
+
+		for(Mobile piece : moveList){
+			piece.move(this);
+		}
 	}
 
 	@Override
@@ -122,7 +145,7 @@ public class Grid {
 				if(piece != null){
 					str += piece.toString();
 				}else{
-					str += " ";
+					str += "\u00B7";
 				}
 				
 				if(pos.getCol() == Position.MAX_WIDTH - 1){

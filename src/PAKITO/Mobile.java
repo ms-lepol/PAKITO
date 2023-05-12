@@ -2,6 +2,7 @@ package PAKITO;
 
 abstract class Mobile extends Piece implements Moveable{
     int dir;
+    int wait_time;
 
     /*
      * Donne une direction aleatoire
@@ -9,7 +10,7 @@ abstract class Mobile extends Piece implements Moveable{
      * @return int  la direction 
      * 
      */
-    static public int getRandDir(){
+    public int getRandDir(){
         return (int)(1+Math.random()*7);
     }
 
@@ -17,12 +18,12 @@ abstract class Mobile extends Piece implements Moveable{
      * Calcule la nouvelle position d'un déplacement
      * dans une direction donnée 
      * 
-     * @param Position pos  la position de base
+     * @param Position curr  la position de base
      * @param int dir       la direction voulue
      * 
      * @return Position     la position hypothetyque de la piece
      */
-    static public Position getNextPos(Position curr, int dir){
+    public Position getNextPos(Position curr, int dir){
         int row = 0; 
         int col = 0;
         switch (dir){
