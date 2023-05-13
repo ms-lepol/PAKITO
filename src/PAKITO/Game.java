@@ -2,17 +2,20 @@ package PAKITO;
 
 public class Game {
     private boolean finish = false;
-    private final int N_ROUND = 5; 
+    private final int N_ROUND = 10; 
 
     public Game(){
         Grid g = new Grid();
         Hunter h;
-        System.out.println(g.toString());
+        //System.out.println(g.toString());
         wait(1);
         //while(!finish){
         for(int round = 0; round < N_ROUND; round++){
             g.update();
+            System.out.println("------------------------------------ TOUR N°"+(int)(round+1)+" ------------------------------------");
+            
             System.out.println(g.toString());
+            
             h = g.foundTreasure();
             if(h != null){
                 finish = true;

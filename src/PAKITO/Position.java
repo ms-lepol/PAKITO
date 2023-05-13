@@ -23,7 +23,15 @@ class Position implements Comparable<Position>{
     public int getRow(){
         return this.row;
     }
-
+    
+    public void setCol(int col) {
+    	this.col = col;
+    }
+    
+    public void setRow(int row) {
+    	this.row = row;
+    }
+    
     /*
      * Informe de la validité de la position dans la grille
      * 
@@ -46,7 +54,15 @@ class Position implements Comparable<Position>{
     public static Position randPos(){
         return new Position((int)(1+Math.random()*(Position.MAX_HEIGHT - 2)), (int)(1+Math.random()*(Position.MAX_WIDTH - 2)));
     }
-
+    /*
+    * Donne une position aléatoire qui appartient rentre dans les coordonnées exigées (bornes comprises)
+    * 
+    * @return Position     La position aleatoire
+    * 
+    */
+    public static Position randPos(int minH, int maxH, int minW, int maxW){
+        return new Position((int)(1+Math.random()*(maxH-minH)+minH), (int)(1+Math.random()*(maxW-minW)+minW));
+    }
     /*
     * Comparaison simplifiee de deux positions
     * 
@@ -73,6 +89,27 @@ class Position implements Comparable<Position>{
         if (this.row<o.getRow()) return -1;
         if (this.row==o.getRow()&&this.col<o.getCol()) return -1;
         return 1;
+    }
+    
+    public int distanceTo(Position o) {
+    	
+    	if (this.equals(o)) {
+    		return 0;
+    	}
+    	int rowDistance = Math.abs(o.getRow()-this.row);
+    	int colDistance = Math.abs(o.getRow()-this.row);
+    	int distance = rowDistance*rowDistance + colDistance * colDistance;
+    	return distance;
+    }
+    
+    public int directionTo(Position o) {
+    	if (col-o.getCol()==0) {
+    		return (row<o.getRow()) ? 7:3 ;
+    	}
+    	if (row-o.getRow()==0) {
+    		return (col<o.getCol()) ? 1:5 ;
+    	}
+    	return 1;
     }
     
     @Override

@@ -65,21 +65,27 @@ public class Hunter extends Mobile {
 
         if(target == null){
             // Position libre
-
             // Placement sur la nouvelle position
             LinkedList<Piece> li = new LinkedList<Piece>();
             li.add(this);
             g.Grid.put(endPos, li);
 
-            // Supression de l'ancien emplacement
+            // Suppression de l'ancien emplacement
             g.removeLast(startPos);
             
             return;
         }
 
-        if(target instanceof Fixed){
-		    ((Fixed) target).process(this);
+        if(target instanceof Piece){
+		    ((Piece) target).process(this);
             return;
         }
+	}
+
+	@Override
+	public void process(Hunter h) {
+		// TODO Auto-generated method stub
+		h.dir = h.getRandDir();
+		h.move(h.getGrid());
 	}
 }

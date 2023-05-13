@@ -3,13 +3,19 @@ import java.util.*;
 
 public class Grid {
 	Map<Position,LinkedList<Piece>> Grid;
-
+	
+	static private final int NB_WALLS_MIN = 2;
+	static private final int NB_WALLS_MAX = 4;
+	static private final int LEN_WALL_MIN =  2;
+	static private final int LEN_WALL_MAX =  6;
+	
 	public Grid(){
 		Grid = new HashMap<Position,LinkedList<Piece>>();
 		initEmptyGrid();
+		initWalls();
 
 		List<Piece> li = new ArrayList<>();
-		for(int i = 0; i<10; i++){
+		for(int i = 0; i<4; i++){
 			li.add(new Tool());
 		}
 		li.add(new Hunter());
@@ -71,8 +77,7 @@ public class Grid {
 		boolean isPlaced = false;
 		while(!isPlaced){
 			Position rPos = Position.randPos();
-			Piece currP = getPiece(rPos);
-			if(currP == null){
+			if(isEmpty(rPos)){
 				// Case libre
 				LinkedList<Piece> li = new LinkedList<Piece>();
 				li.addLast(p);
@@ -93,7 +98,80 @@ public class Grid {
 			initPiece(p);
 		}
 	}
-
+	
+	public void initWall() {
+		boolean canBePlaced = true;
+		
+		boolean isPlaced = false;
+		while(!isPlaced) {
+			int lenWall = (int)(Math.random()*(LEN_WALL_MAX-LEN_WALL_MIN)+1+LEN_WALL_MIN);
+			boolean isVertical = Math.random() < 0.5;
+			canBePlaced = true;
+			Position initPos = Position.randPos(2,Position.MAX_HEIGHT-3,2,Position.MAX_WIDTH-3);
+			if(isStoneValid(initPos)) {
+				for (int i=1;i<lenWall;i++) {
+					if (isVertical) {
+						if (!isStoneValid(new Position(initPos.getRow(),initPos.getCol()+i))) {
+							canBePlaced = false;
+							break;
+						}
+					} else {
+						if (!isStoneValid(new Position(initPos.getRow()+i,initPos.getCol()))) {
+							canBePlaced = false;
+							break;
+						}
+					}
+				}
+				if (canBePlaced) {
+					for (int i=0;i<lenWall;i++) {
+						if (isVertical) {
+							LinkedList<Piece> li = new LinkedList<Piece>();
+							li.addLast(new Stone());
+							Grid.put(new Position(initPos.getRow(),initPos.getCol()+i), li);
+							isPlaced = true;
+						} else {
+							LinkedList<Piece> li = new LinkedList<Piece>();
+							li.addLast(new Stone());
+							Grid.put(new Position(initPos.getRow()+i,initPos.getCol()), li);
+							isPlaced = true;
+						}
+					}
+					isPlaced=true;
+				}
+			}
+		}
+	}
+	public void initWalls(){
+		int nbWalls = (int)(Math.random()*(NB_WALLS_MAX-NB_WALLS_MIN)+1+NB_WALLS_MIN);
+		for (int i = 0;i<nbWalls;i++) {
+			initWall();
+		}
+	}
+	
+	public boolean isStoneValid(Position p) {
+		if (!(p.getCol()<Position.MAX_WIDTH-2&&p.getCol()>1&&
+			  p.getRow()<Position.MAX_HEIGHT-2&&p.getRow()>1)) {
+			return false;
+		}
+		
+		if (!isEmpty(p)) {
+			return false;
+		}
+		if (!isEmpty(p.getRow()+1,p.getCol())) {
+			return false;
+		}
+		if (!isEmpty(p.getRow()-1,p.getCol())) {
+			return false;
+		}
+		if (!isEmpty(p.getRow(),p.getCol()+1)) {
+			return false;
+		}
+		if (!isEmpty(p.getRow(),p.getCol()-1)) {
+			return false;
+		}
+		return true;
+	}
+	
 	/*
 	 * Position quelconque
 	*/
@@ -117,7 +195,15 @@ public class Grid {
 		}
 		return null;
 	}
-
+	public boolean isEmpty(Position pos) {
+		return getPiece(pos)==null;
+	}
+	
+	public boolean isEmpty(int row,int col) {
+		return isEmpty(new Position(row,col));
+	}
+	
+	
 	/*
 	 * Ajouter une piece a une position deja instanciée
 	 */

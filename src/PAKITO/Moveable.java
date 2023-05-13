@@ -7,4 +7,5 @@ public interface Moveable {
      * bouger d'un personnage mobile 
      */
     void move(Grid g);
+    Position getNextPos(Position curr,int dir);
 }

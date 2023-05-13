@@ -1,6 +1,6 @@
 package PAKITO;
 
-abstract class Piece {
+abstract class Piece implements Questionnable{
     char str;
 
     public void setStr(char str) {
