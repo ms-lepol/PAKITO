@@ -1,6 +1,5 @@
 package PAKITO;
 import java.util.*;
-import java.util.concurrent.ConcurrentHashMap;
 
 public class Grid {
 	Map<Position,LinkedList<Piece>> Grid;
@@ -10,8 +9,8 @@ public class Grid {
 		initEmptyGrid();
 
 		List<Piece> li = new ArrayList<>();
-		for(int i = 0; i<5; i++){
-			li.add(new Stone());
+		for(int i = 0; i<10; i++){
+			li.add(new Tool());
 		}
 		li.add(new Hunter());
 		li.add(new Hunter());
@@ -76,7 +75,7 @@ public class Grid {
 			if(currP == null){
 				// Case libre
 				LinkedList<Piece> li = new LinkedList<Piece>();
-				li.add(p);
+				li.addLast(p);
 				Grid.put(rPos, li);
 				isPlaced = true;
 			}
@@ -112,27 +111,90 @@ public class Grid {
 	*/
 	public Position getPos(Piece p){
 		for (Map.Entry<Position, LinkedList<Piece>> entry : Grid.entrySet()) {
-			if (Objects.equals(p, entry.getValue().getLast())){
+			if (!(entry.getValue().isEmpty()) && p.equals(entry.getValue().getLast())){
 				return entry.getKey();
 			}
 		}
 		return null;
 	}
+
+	/*
+	 * Ajouter une piece a une position deja instanciée
+	 */
+	public void addPiece(Piece piece, Position pos){
+		for(Position key : Grid.keySet()){
+			if(key.equals(pos)){
+				Grid.get(key).addLast(piece);
+			}
+		}
+	}
+
+	/*
+	 * Enlever La derniere piece de la liste
+	 * a la position indiquée et déjà instanciée
+	 */
+	public void removeLast(Position pos){
+		for(Position key : Grid.keySet()){
+			if(key.equals(pos)){
+				Grid.get(key).removeLast();
+			}
+		}
+	}
 	
+	/*
+	 * Fonction d'update de la grille qui va
+	 * bouger tous les personnages Mobiles
+	 */
 	public void update(){
-		List<Mobile> moveList = new ArrayList<Mobile>();
+		List<Mobile> actionList = new ArrayList<Mobile>();
+		List<Position> removeList = new ArrayList<Position>();
 
 		for (Position key : Grid.keySet()) {
 			Piece p = getPiece(key);
 			if(p == null || !(p instanceof Mobile)){
 				continue;
 			}
-			moveList.add((Mobile)p);
+			actionList.add((Mobile)p);
 		}
-
-		for(Mobile piece : moveList){
+		for(Mobile piece : actionList){
 			piece.move(this);
 		}
+
+		// Parcours enlever toutes les positions
+		// contenant une liste vide
+		for (Position key : Grid.keySet()) {
+			if(Grid.get(key).isEmpty()){
+				removeList.add(key);
+			}
+		}
+		for(Position pos : removeList){
+			Grid.remove(pos);
+		}
+
+
+	}
+
+	/*
+	 * Retourne le chasseur ayant trouvé le trésor
+	 * si il existe, retourne null sinon
+	 */
+	public Hunter foundTreasure(){
+		List<Hunter> hunterList = new ArrayList<Hunter>();
+
+		for (Position key : Grid.keySet()) {
+			Piece p = getPiece(key);
+			if(p == null || !(p instanceof Hunter)){
+				continue;
+			}
+			hunterList.add((Hunter)p);
+		}
+		for(Hunter h : hunterList){
+			if(h.getTreasure_found()){
+				return h;
+			}
+		}
+
+		return null;
 	}
 
 	@Override

@@ -5,6 +5,9 @@ public class Border extends Fixed{
         setStr(c);
     }
 
+    /*
+     * Rediriger le personnage façon mirroir
+     */
     @Override
     public void process(Hunter h) {
         
