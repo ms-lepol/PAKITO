@@ -27,36 +27,46 @@ public class Controleur {
         return game.getGrid().foundTreasure();
     }
 
-    /*
-	 * Fonction d'update de la grille qui va
-	 * bouger tous les personnages Mobiles
-	 */
-    public void gridUpdate(){
-        List<Mobile> actionList = new ArrayList<Mobile>();
-		List<Position> removeList = new ArrayList<Position>();
-
-        // Liste des pieces mobiles a bouger
-		for (Position key : game.getGrid().Grid.keySet()) {
-			Piece p = game.getGrid().getPiece(key);
-			if(p == null || !(p instanceof Mobile)){
-				continue;
-			}
-			actionList.add((Mobile)p);
-		}
-		for(Mobile piece : actionList){
-			piece.move();
-		}
-
+    public int getRound(){
+        return game.getRound();
+    }
+    
+    public boolean updatePiece(List<Mobile> li, int n){
+        return li.get(n).move();
+    }
+    
+    public void clearEmpty(){
+        List<Position> removeList = new ArrayList<Position>();
 		// Parcours enlever toutes les positions
 		// contenant une liste vide
-		for (Position key : game.getGrid().Grid.keySet()) {
-			if(game.getGrid().Grid.get(key).isEmpty()){
+		for (Position key : game.getGrid().getGrid().keySet()) {
+			if(game.getGrid().getGrid().get(key).isEmpty()){
 				removeList.add(key);
 			}
 		}
 		for(Position pos : removeList){
-			game.getGrid().Grid.remove(pos);
+			game.getGrid().getGrid().remove(pos);
 		}
+    }
+
+    public void printGrid(){
+        game.printGrid(getRound());
+    }
+
+    public void gridUpdate(){
+        LinkedList<Mobile> actionList = game.getGrid().getLiHunter();
+
+        for(int i = 0; i<actionList.size(); i++){
+            boolean b = updatePiece(actionList, i);
+            clearEmpty();
+            if(b){
+                printGrid();
+            }
+            if(((Hunter) actionList.get(i)).getTreasure_found()){
+                return;
+            }
+        }
+
     }
 
 }

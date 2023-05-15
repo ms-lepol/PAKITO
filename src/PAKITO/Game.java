@@ -5,41 +5,10 @@ public class Game { // Vue
     private Controleur c;
 
     private boolean finish = false;
-    private final int N_ROUND = 20; 
+    private int round; 
 
     public Game(Controleur c){
         this.c = c;
-    }
-
-    public void startGame(){
-        g = new Grid(c);
-        
-        Hunter winner;
-        //System.out.println(g.toString());
-        wait(1);
-
-        int round = 0;
-        while(!finish){
-        //for(int round = 0; round < N_ROUND; round++){
-            System.out.flush();
-
-            c.gridUpdate();
-
-            System.out.println("------------------------------------ TOUR N°"+(int)(round+1)+" ------------------------------------");
-            
-            System.out.println(g.toString());
-            
-            winner = c.foundTreasure();
-            if(winner != null){
-                finish = true;
-                break;
-            }
-            wait(1);
-            round++;
-        }
-        System.out.println("------------ FIN DU JEU ------------");
-        //System.out.println("------------ "+h.toString()+" Gagne la partie ------------");
-        System.out.print("\n");
     }
 
     public Controleur getCtrl() {
@@ -50,13 +19,51 @@ public class Game { // Vue
         return g;
     }
 
+    public int getRound() {
+        return round;
+    }
+
+    public void startGame(){
+        round = 0;
+        g = new Grid(c);
+        
+        Hunter winner = null;
+        printGrid(round);
+
+        while(!finish){
+            c.gridUpdate();
+            
+            winner = c.foundTreasure();
+            if(winner != null){
+                finish = true;
+                break;
+            }
+
+            round++;
+        }
+        printGrid(round);
+        System.out.println("FIN DU JEU ---------");
+        System.out.println(winner.toString()+" Gagne la partie --");
+        System.out.print("\n");
+    }
+
+    public void printGrid(int round){
+        System.out.print("\033[H\033[2J");  
+        System.out.flush(); 
+
+        System.out.println("TOUR N°"+(int)(round+1)+" -----------");
+        System.out.println(g.toString());
+
+        wait(0.5);
+    }
+
     /*
      * Permet de mettre le fil actuel en pause 
      * pendant le nombre de secondes indiquées
      */
-    public void wait(int sec){
+    public void wait(double sec){
         try {
-            Thread.sleep(sec*1000);
+            Thread.sleep((long)(sec*1000.0));
         } catch (InterruptedException e) {
             Thread.currentThread().interrupt();
         }
