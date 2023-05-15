@@ -14,49 +14,49 @@ public class Border extends Fixed{
     public void process(Hunter h) {
     	Grid g = h.getGrid();
     	boolean isVert = this.isVertical(g.getPos(this));
-        switch(h.dir) {
+        switch(h.getDir()) {
         	case 1:
-        		h.dir=5;
+        		h.setDir(5);
         		break;
         	case 2:
         		if (isVert) {
-        			h.dir=8;
+        			h.setDir(4);
         		} else {
-        			h.dir=4;
+        			h.setDir(8);
         		}
         		break;
         	case 3:
-        		h.dir=7;
+        		h.setDir(7);;
         		break;
         	case 4:
         		if (isVert) {
-        			h.dir=6;
+        			h.setDir(2);
         		} else {
-        			h.dir=2;
+        			h.setDir(6);
         		}
         		break;
         	case 5:
-        		h.dir=1;
+        		h.setDir(1);
         		break;
         	case 6:
         		if (isVert) {
-        			h.dir=4;
+        			h.setDir(8);
         		} else {
-        			h.dir=8;
+        			h.setDir(4);
         		}
         		break;
         	case 7:
-        		h.dir=3;
+        		h.setDir(3);
         		break;
         	case 8:
         		if (isVert) {
-        			h.dir=2;
+        			h.setDir(6);
         		} else {
-        			h.dir=6;
+        			h.setDir(2);
         		}
         		break;
         	default:
-        		h.dir=1;
+        		h.setDir(1);
         		break;
         }
         h.move(g);

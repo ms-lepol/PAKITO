@@ -43,6 +43,10 @@ public class Hunter extends Mobile {
     public void setWait_time(int wait_time){
         this.wait_time = wait_time;
     }
+    
+    public void setDir(int direction) {
+    	dir = direction;
+    }
 
     @Override
     public void move(Grid g){

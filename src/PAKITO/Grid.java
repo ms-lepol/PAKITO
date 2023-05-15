@@ -18,7 +18,7 @@ public class Grid {
 		for(int i = 0; i<4; i++){
 			li.add(new Tool());
 		}
-		li.add(new Hunter());
+		//li.add(new Hunter());
 		li.add(new Hunter());
 		li.add(new Tool());
 		li.add(new Treasure());
