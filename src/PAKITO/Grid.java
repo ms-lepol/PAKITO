@@ -22,6 +22,7 @@ public class Grid { // Modele
 		initWalls();
 		initHunters(NB_HUNTER);
 		fillGrid();
+		initRoadMap(3);
 	}
 
 	public Map<Position, LinkedList<Piece>> getGrid() {
@@ -201,20 +202,23 @@ public class Grid { // Modele
 		return true;
 	}
 	
-	public void initRoadMap() {
-		//Get the treasure position
-		Position treasurePos = getTreasurePosition();
-		boolean isPlaced = false;
-		while(!isPlaced){
-			Position rPos = Position.randPos();
-			if(isEmpty(rPos) && treasurePos.directionTo(rPos)!=0){
-				// Case libre
-				LinkedList<Piece> li = new LinkedList<Piece>();
-				li.addLast(new RoadMap());
-				Grid.put(rPos, li);
-				isPlaced = true;
+	public void initRoadMap(int nbRoadMap) {
+		for (int i=0;i<nbRoadMap;i++) {
+			//Get the treasure position
+			Position treasurePos = getTreasurePosition();
+			boolean isPlaced = false;
+			while(!isPlaced){
+				Position rPos = Position.randPos();
+				if(isEmpty(rPos) && treasurePos.directionTo(rPos)!=0){
+					// Case libre
+					LinkedList<Piece> li = new LinkedList<Piece>();
+					li.addLast(new RoadMap());
+					Grid.put(rPos, li);
+					isPlaced = true;
+				}
 			}
 		}
+		
 	}
 	
 	public Position getTreasurePosition() {

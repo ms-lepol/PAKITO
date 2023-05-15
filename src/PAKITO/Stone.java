@@ -30,7 +30,8 @@ public class Stone extends Fixed { // Modele
         if (isVertical) {
         	Position TopEdge = this.findEdge(stonePos,hgrid,-1,0);
         	Position BottomEdge = this.findEdge(stonePos,hgrid,1,0);
-        	if ((stonePos.distanceTo(TopEdge)==0 && tmpdir == 7 ) || (stonePos.distanceTo(BottomEdge)==0 && tmpdir==3)){
+        	if ((stonePos.distanceTo(TopEdge)==0 && (tmpdir >= 6 && tmpdir <= 8)) || 
+        		(stonePos.distanceTo(BottomEdge)==0 && (tmpdir >= 2 && tmpdir <= 4))){
         		direction = 1;
        		} else {
        			direction = (stonePos.distanceTo(TopEdge)<stonePos.distanceTo(BottomEdge)) ? 3 : 7;
@@ -38,7 +39,8 @@ public class Stone extends Fixed { // Modele
         } else {
         	Position LeftEdge = this.findEdge(stonePos,hgrid,0,-1);
         	Position RightEdge = this.findEdge(stonePos,hgrid,0,1);
-        	if ((stonePos.distanceTo(LeftEdge)==0 && tmpdir == 1 ) || (stonePos.distanceTo(RightEdge)==0 && tmpdir==5)){
+        	if ((stonePos.distanceTo(LeftEdge)==0 && (tmpdir == 1 || tmpdir == 8 || tmpdir == 2)) || 
+        			(stonePos.distanceTo(RightEdge)==0 && (tmpdir >= 4 && tmpdir <= 6))){
         		direction = 3;
        		} else {
        			direction = (stonePos.distanceTo(LeftEdge)<stonePos.distanceTo(RightEdge)) ? 5 : 1;
