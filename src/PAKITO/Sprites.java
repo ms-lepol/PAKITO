@@ -1,5 +1,7 @@
 package PAKITO;
 
-public enum Sprites {
-    
+public class Sprites {
+    public String empty = 
+"""
+""";
 }
