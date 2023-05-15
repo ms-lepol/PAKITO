@@ -103,18 +103,25 @@ class Position implements Comparable<Position>{ // Modele
     }
     
     public int directionTo(Position o) {
-    	if (col-o.getCol()==0) {
-    		return (row<o.getRow()) ? 7:3 ;
+    	int vectX = o.getCol()-col;
+    	int vectY = o.getRow()-row;
+    	if (vectX==0) {
+    		return (vectY<0) ? 3:7  ;
     	}
-    	if (row-o.getRow()==0) {
-    		return (col<o.getCol()) ? 1:5 ;
+    	if (vectY==0) {
+    		return (vectX<0) ? 5:1 ;
     	}
-    	if (o.getRow()<row) {
-    		return (o.getCol()<col) ? 4:2;
-    	} else {
-    		return (o.getCol()<col) ? 6:8;
+    	if (vectX==vectY) {
+    		if (vectY<0) {
+        		return (vectX<0) ? 4:2;
+        	} 
+        	if (vectY>0){
+        		return (vectX<0) ? 6:8;
+        	}
     	}
-   }
+    	return 0;
+    	
+    }	
     
     @Override
     public String toString() {

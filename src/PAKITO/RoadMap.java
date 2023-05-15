@@ -6,15 +6,8 @@ public class RoadMap extends Fixed{ // Modele
     }
     
     public int getTreasureDirection(Grid g) {
-    	int dir = 0;
     	Position roadMapPos = g.getPos(this);
-    	Position treasurePos = new Position();
-    	for (Position key : g.Grid.keySet()) {
-			Piece p = g.getPiece(key);
-			if(p instanceof Treasure){
-				treasurePos = key;
-			}
-		}
+    	Position treasurePos = g.getTreasurePosition();
     	
     	return roadMapPos.directionTo(treasurePos);
     }
@@ -22,7 +15,7 @@ public class RoadMap extends Fixed{ // Modele
     @Override
     public void process(Hunter h) {
         // Besoin de la direction du trésor
-    	h.dir = getTreasureDirection(h.getCtrl().getGame().getGrid());
+    	h.setDir(getTreasureDirection(h.getCtrl().getGame().getGrid()));
     	moveHunter(h);
     }
 }

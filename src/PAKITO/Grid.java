@@ -24,11 +24,12 @@ public class Grid { // Modele
 		}
 		//li.add(new Hunter());
 		li.add(new Hunter(c));
-		li.add(new Hunter(c));
-		li.add(new Hunter(c));
 		li.add(new Tool());
 		li.add(new Treasure());
 		li.add(new Glue());
+		initRoadMap();
+		initRoadMap();
+		initRoadMap();
 
 		initPieces(li);
 	}
@@ -178,6 +179,31 @@ public class Grid { // Modele
 		return true;
 	}
 	
+	public void initRoadMap() {
+		//Get the treasure position
+		Position treasurePos = getTreasurePosition();
+		boolean isPlaced = false;
+		while(!isPlaced){
+			Position rPos = Position.randPos();
+			if(isEmpty(rPos) && treasurePos.directionTo(rPos)!=0){
+				// Case libre
+				LinkedList<Piece> li = new LinkedList<Piece>();
+				li.addLast(new RoadMap());
+				Grid.put(rPos, li);
+				isPlaced = true;
+			}
+		}
+	}
+	
+	public Position getTreasurePosition() {
+		Position treasurePos = new Position();
+		for (Map.Entry<Position, LinkedList<Piece>> entry : Grid.entrySet()) {
+			if (!(entry.getValue().isEmpty()) && entry.getValue().getFirst() instanceof Treasure){
+				treasurePos = entry.getKey();
+			}
+		}
+		return treasurePos;
+	}
 	/*
 	 * Position quelconque
 	*/
