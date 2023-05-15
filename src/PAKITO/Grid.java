@@ -2,7 +2,7 @@ package PAKITO;
 import java.util.*;
 
 public class Grid { // Modele
-	Map<Position,LinkedList<Piece>> Grid;
+	private Map<Position,LinkedList<Piece>> Grid;
 
 	private Controleur c;
 	
@@ -10,6 +10,9 @@ public class Grid { // Modele
 	static private final int NB_WALLS_MAX = 4;
 	static private final int LEN_WALL_MIN =  2;
 	static private final int LEN_WALL_MAX =  6;
+
+	private final int NB_HUNTER = 2;
+	private LinkedList<Mobile> liHunter;
 	
 	public Grid(Controleur c){
 		this.c = c;
@@ -17,20 +20,16 @@ public class Grid { // Modele
 		Grid = new HashMap<Position,LinkedList<Piece>>();
 		initEmptyGrid();
 		initWalls();
+		initHunters(NB_HUNTER);
+		fillGrid();
+	}
 
-		List<Piece> li = new ArrayList<>();
-		for(int i = 0; i<4; i++){
-			li.add(new Tool());
-		}
-		//li.add(new Hunter());
-		li.add(new Hunter(c));
-		li.add(new Hunter(c));
-		li.add(new Hunter(c));
-		li.add(new Tool());
-		li.add(new Treasure());
-		li.add(new Glue());
+	public Map<Position, LinkedList<Piece>> getGrid() {
+		return Grid;
+	}
 
-		initPieces(li);
+	public LinkedList<Mobile> getLiHunter() {
+		return liHunter;
 	}
 
 	/*
@@ -104,6 +103,29 @@ public class Grid { // Modele
 			initPiece(p);
 		}
 	}
+
+	public void initHunters(int nb){
+		LinkedList<Mobile> li = new LinkedList<>();
+
+		for(int i = 0; i<nb; i++){
+			Hunter x = new Hunter(c);
+			li.add(x);
+			initPiece(x);
+		}
+
+		liHunter = li;
+	}
+
+	public void fillGrid(){
+		List<Piece> li = new ArrayList<>();
+		
+		li.add(new Tool());
+		li.add(new Treasure());
+		li.add(new Glue());
+		li.add(new Glue());
+
+		initPieces(li);
+	}
 	
 	public void initWall() {
 		boolean canBePlaced = true;
@@ -147,6 +169,7 @@ public class Grid { // Modele
 			}
 		}
 	}
+	
 	public void initWalls(){
 		int nbWalls = (int)(Math.random()*(NB_WALLS_MAX-NB_WALLS_MIN)+1+NB_WALLS_MIN);
 		for (int i = 0;i<nbWalls;i++) {

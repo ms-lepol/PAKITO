@@ -59,7 +59,7 @@ public class Hunter extends Mobile { // Modele
         }
 
         Position startPos = c.getGame().getGrid().getPos(this);
-		Position endPos = this.getNextPos(startPos,dir);
+		Position endPos = getNextPos(startPos,dir);
 
         if(!(endPos.isValid())){
             return false;
@@ -72,11 +72,11 @@ public class Hunter extends Mobile { // Modele
             // Placement sur la nouvelle position
             LinkedList<Piece> li = new LinkedList<Piece>();
             li.add(this);
-            c.getGame().getGrid().Grid.put(endPos, li);
+            c.getGame().getGrid().getGrid().put(endPos, li);
 
             // Suppression de l'ancien emplacement
             c.getGame().getGrid().removeLast(startPos);
-            
+
             return true;
         }
 
@@ -84,7 +84,6 @@ public class Hunter extends Mobile { // Modele
 		    ((Piece) target).process(this);
             return true;
         }
-
         return false;
 	}
 

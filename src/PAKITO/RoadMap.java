@@ -9,7 +9,7 @@ public class RoadMap extends Fixed{ // Modele
     	int dir = 0;
     	Position roadMapPos = g.getPos(this);
     	Position treasurePos = new Position();
-    	for (Position key : g.Grid.keySet()) {
+    	for (Position key : g.getGrid().keySet()) {
 			Piece p = g.getPiece(key);
 			if(p instanceof Treasure){
 				treasurePos = key;
