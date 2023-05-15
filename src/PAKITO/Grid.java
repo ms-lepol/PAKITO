@@ -1,7 +1,7 @@
 package PAKITO;
 import java.util.*;
 
-public class Grid {
+public class Grid { // Modele
 	Map<Position,LinkedList<Piece>> Grid;
 
 	private Controleur c;
@@ -11,8 +11,8 @@ public class Grid {
 	static private final int LEN_WALL_MIN =  2;
 	static private final int LEN_WALL_MAX =  6;
 	
-	public Grid(){
-		c = new Controleur();
+	public Grid(Controleur c){
+		this.c = c;
 
 		Grid = new HashMap<Position,LinkedList<Piece>>();
 		initEmptyGrid();
@@ -23,7 +23,9 @@ public class Grid {
 			li.add(new Tool());
 		}
 		//li.add(new Hunter());
-		li.add(new Hunter());
+		li.add(new Hunter(c));
+		li.add(new Hunter(c));
+		li.add(new Hunter(c));
 		li.add(new Tool());
 		li.add(new Treasure());
 		li.add(new Glue());
@@ -230,20 +232,12 @@ public class Grid {
 			}
 		}
 	}
-	
-	/*
-	 * Fonction d'update de la grille qui va
-	 * bouger tous les personnages Mobiles
-	 */
-	public void update(Mobile p){
-		
-
-
-	}
 
 	/*
 	 * Retourne le chasseur ayant trouvé le trésor
 	 * si il existe, retourne null sinon
+	 * 
+	 * @return Hunter	le chasseur ayant trouve le tresor
 	 */
 	public Hunter foundTreasure(){
 		List<Hunter> hunterList = new ArrayList<Hunter>();

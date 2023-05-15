@@ -1,6 +1,6 @@
 package PAKITO;
 
-abstract class Mobile extends Piece implements Moveable{
+abstract class Mobile extends Piece implements Moveable{ // Modele
     int dir;
     int wait_time;
 

@@ -7,28 +7,29 @@ public class Game { // Vue
     private boolean finish = false;
     private final int N_ROUND = 20; 
 
-    public Game(){
-        g = new Grid();
-        c = new Controleur();
+    public Game(Controleur c){
+        this.c = c;
+    }
 
+    public void startGame(){
+        g = new Grid(c);
+        
         Hunter winner;
         //System.out.println(g.toString());
         wait(1);
-        //while(!finish){
-        for(int round = 0; round < N_ROUND; round++){
-            System.out.flush();
-
-            c.gridUpdate();
 
         int round = 0;
         while(!finish){
         //for(int round = 0; round < N_ROUND; round++){
-            g.update();
+            System.out.flush();
+
+            c.gridUpdate();
+
             System.out.println("------------------------------------ TOUR N°"+(int)(round+1)+" ------------------------------------");
             
-            System.out.println(c.getGrid().toString());
+            System.out.println(g.toString());
             
-            winner = g.foundTreasure();
+            winner = c.foundTreasure();
             if(winner != null){
                 finish = true;
                 break;

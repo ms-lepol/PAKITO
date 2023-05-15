@@ -1,6 +1,6 @@
 package PAKITO;
 
-abstract class Fixed extends Piece implements Questionnable {
+abstract class Fixed extends Piece { // Modele
 
     /*
      * Pour la piece fixe actuelle, avec l'interface Questionnable
@@ -13,9 +13,9 @@ abstract class Fixed extends Piece implements Questionnable {
      * l'Outil, la RoadMap ou la Glue) 
      */
     public void moveHunter(Hunter h){
-        h.getGrid().removeLast(h.getGrid().getPos(h));
+        h.getCtrl().getGame().getGrid().removeLast(h.getCtrl().getGame().getGrid().getPos(h));
 
-        Position pos = h.getGrid().getPos(this);
-        h.getGrid().addPiece(h, pos);
+        Position pos = h.getCtrl().getGame().getGrid().getPos(this);
+        h.getCtrl().getGame().getGrid().addPiece(h, pos);
     }
 }

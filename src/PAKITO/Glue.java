@@ -1,6 +1,6 @@
 package PAKITO;
 
-public class Glue extends Fixed {
+public class Glue extends Fixed { // Modele
     public Glue() {
         setStr('G');
     }

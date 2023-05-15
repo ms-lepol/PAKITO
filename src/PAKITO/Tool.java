@@ -1,6 +1,6 @@
 package PAKITO;
 
-public class Tool extends Fixed {
+public class Tool extends Fixed { // Modele
     public Tool() {
         setStr('T');
     }

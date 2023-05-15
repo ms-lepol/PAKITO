@@ -2,12 +2,16 @@ package PAKITO;
 
 import java.util.LinkedList;
 
-public class Hunter extends Mobile {
+public class Hunter extends Mobile { // Modele
+    private Controleur c;
+
     static private int nb = 0;
     private boolean treasure_found = false;
     private boolean have_tool = false;
 
-    public Hunter() {
+    public Hunter(Controleur c) {
+        this.c = c;
+
         setStr((char)(65+nb));
         nb++;
 
@@ -17,6 +21,10 @@ public class Hunter extends Mobile {
 
     public int getDir(){
         return dir;
+    }
+
+    public Controleur getCtrl() {
+        return c;
     }
 
     public boolean getHave_Tool(){
@@ -44,45 +52,45 @@ public class Hunter extends Mobile {
     }
 
     @Override
-    public void move(Controleur c){
+    public boolean move(){
         if(wait_time > 0){
             wait_time--;
-            return;
+            return true;
         }
 
-        Position startPos = c.getGrid().getPos(this);
+        Position startPos = c.getGame().getGrid().getPos(this);
 		Position endPos = this.getNextPos(startPos,dir);
 
         if(!(endPos.isValid())){
-            System.out.println("Position "+ endPos.toString() +" non valide");
-            return;
+            return false;
         }
 
-        Piece target = c.getGrid().getPiece(endPos);
+        Piece target = c.getGame().getGrid().getPiece(endPos);
 
         if(target == null){
             // Position libre
             // Placement sur la nouvelle position
             LinkedList<Piece> li = new LinkedList<Piece>();
             li.add(this);
-            g.Grid.put(endPos, li);
+            c.getGame().getGrid().Grid.put(endPos, li);
 
             // Suppression de l'ancien emplacement
-            g.removeLast(startPos);
+            c.getGame().getGrid().removeLast(startPos);
             
-            return;
+            return true;
         }
 
         if(target instanceof Piece){
 		    ((Piece) target).process(this);
-            return;
+            return true;
         }
+
+        return false;
 	}
 
 	@Override
 	public void process(Hunter h) {
-		// TODO Auto-generated method stub
 		h.dir = h.getRandDir();
-		h.move(h.getGrid());
+		h.move();
 	}
 }

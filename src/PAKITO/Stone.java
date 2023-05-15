@@ -1,6 +1,6 @@
 package PAKITO;
 
-public class Stone extends Fixed {
+public class Stone extends Fixed { // Modele
     public Stone() {
         setStr('\u25A0');
     }
@@ -21,7 +21,7 @@ public class Stone extends Fixed {
         	return;
         }
         int direction= 0;
-        Grid hgrid = h.getGrid();
+        Grid hgrid = h.getCtrl().getGame().getGrid();
         int tmpdir = h.getDir();
         Position stonePos = hgrid.getPos(this);
         System.out.println(stonePos.toString());
@@ -47,7 +47,7 @@ public class Stone extends Fixed {
         }
         
         h.setDir(direction);
-        h.move(h.getGrid());
+        h.move();
         h.setDir(tmpdir);
     }
     

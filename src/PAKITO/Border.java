@@ -1,8 +1,6 @@
 package PAKITO;
 
-import java.util.LinkedList;
-
-public class Border extends Fixed{
+public class Border extends Fixed{ // Modele
     public Border(char c){
         setStr(c);
     }
@@ -12,8 +10,7 @@ public class Border extends Fixed{
      */
     @Override
     public void process(Hunter h) {
-    	Grid g = h.getGrid();
-    	boolean isVert = this.isVertical(g.getPos(this));
+    	boolean isVert = this.isVertical(h.getCtrl().getGame().getGrid().getPos(this));
         switch(h.getDir()) {
         	case 1:
         		h.setDir(5);
@@ -59,7 +56,7 @@ public class Border extends Fixed{
         		h.setDir(1);
         		break;
         }
-        h.move(g);
+        h.move();
     }
     
     public boolean isVertical(Position pos) {

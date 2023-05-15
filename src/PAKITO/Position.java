@@ -1,6 +1,6 @@
 package PAKITO;
 
-class Position implements Comparable<Position>{
+class Position implements Comparable<Position>{ // Modele
     static final int MAX_WIDTH = 20;
     static final int MAX_HEIGHT = 10;
     private int row;

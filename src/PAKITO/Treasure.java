@@ -1,6 +1,6 @@
 package PAKITO;
 
-public class Treasure extends Fixed {
+public class Treasure extends Fixed { // Modele
     public Treasure() {
         setStr('X');
     }

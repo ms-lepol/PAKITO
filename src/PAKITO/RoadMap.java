@@ -1,6 +1,6 @@
 package PAKITO;
 
-public class RoadMap extends Fixed{
+public class RoadMap extends Fixed{ // Modele
     public RoadMap(){
         setStr('M');
     }
@@ -22,7 +22,7 @@ public class RoadMap extends Fixed{
     @Override
     public void process(Hunter h) {
         // Besoin de la direction du trésor
-    	h.dir = getTreasureDirection(h.getGrid());
+    	h.dir = getTreasureDirection(h.getCtrl().getGame().getGrid());
     	moveHunter(h);
     }
 }

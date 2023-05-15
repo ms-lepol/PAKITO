@@ -1,11 +1,11 @@
 package PAKITO;
 
-public interface Moveable {
+public interface Moveable { // Modele
 
     /*
      * Fonction définissant la façon de 
      * bouger d'un personnage mobile 
      */
-    void move(Controleur c);
+    boolean move();
     Position getNextPos(Position curr,int dir);
 }
