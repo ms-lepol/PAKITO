@@ -46,11 +46,16 @@ public class Hunter extends Mobile { // Modele
     public void setWait_time(int wait_time){
         this.wait_time = wait_time;
     }
-    
-    public void setDir(int direction) {
-    	dir = direction;
-    }
 
+    /** Commence par regarder si le joueur est bloqué
+     * si non, on calcule la position suivante et on regarde
+     * si c'est une case vide, une case fixe ou un autre chasseur
+     * 
+     * On agit en conséquences
+     *  
+     * @return boolean    true si le deplacement s'est bien terminé,
+     *                    false sinon
+     */
     @Override
     public boolean move(){
         if(wait_time > 0){
@@ -87,6 +92,12 @@ public class Hunter extends Mobile { // Modele
         return false;
 	}
 
+    /** Change de direction a la rencontre d'un autre chasseur
+     * 
+     * Provisoire
+     * 
+     * @param h     le chasseur croisé
+     */
 	@Override
 	public void process(Hunter h) {
 		h.dir = h.getRandDir();

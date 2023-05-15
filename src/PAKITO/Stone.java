@@ -5,7 +5,7 @@ public class Stone extends Fixed { // Modele
         setStr('\u25A0');
     }
 
-    /* 
+    /**
      * Si le chasseur possede un outil, 
      * il peut sauter par dessus le caillou
      * Sinon il est bloqué et doit 'glisser' 

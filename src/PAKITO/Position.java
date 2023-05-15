@@ -1,8 +1,8 @@
 package PAKITO;
 
 class Position implements Comparable<Position>{ // Modele
-    static final int MAX_WIDTH = 20;
-    static final int MAX_HEIGHT = 10;
+    private static int MAX_WIDTH = 20;
+    private static int MAX_HEIGHT = 10;
     private int row;
     private int col;
 
@@ -23,6 +23,14 @@ class Position implements Comparable<Position>{ // Modele
     public int getRow(){
         return this.row;
     }
+
+    public static int getMAX_HEIGHT() {
+        return MAX_HEIGHT;
+    }
+
+    public static int getMAX_WIDTH() {
+        return MAX_WIDTH;
+    }
     
     public void setCol(int col) {
     	this.col = col;
@@ -31,8 +39,18 @@ class Position implements Comparable<Position>{ // Modele
     public void setRow(int row) {
     	this.row = row;
     }
+
+    public static void setMAX_WIDTH(int mAX_WIDTH) {
+        MAX_WIDTH = mAX_WIDTH;
+    }
+
+    public static void setMAX_HEIGHT(int mAX_HEIGHT) {
+        MAX_HEIGHT = mAX_HEIGHT;
+    }
+
+    /* Methodes */
     
-    /*
+    /**
      * Informe de la validité de la position dans la grille
      * 
      * @return Boolean     true si la piece est dans la grille
@@ -45,7 +63,7 @@ class Position implements Comparable<Position>{ // Modele
         return true;
     }
 
-    /*
+    /**
     * Donne une position aléatoire qui ne soit pas un bord
     * 
     * @return Position     La position aleatoire
@@ -54,7 +72,8 @@ class Position implements Comparable<Position>{ // Modele
     public static Position randPos(){
         return new Position((int)(1+Math.random()*(Position.MAX_HEIGHT - 2)), (int)(1+Math.random()*(Position.MAX_WIDTH - 2)));
     }
-    /*
+
+    /**
     * Donne une position aléatoire qui appartient rentre dans les coordonnées exigées (bornes comprises)
     * 
     * @return Position     La position aleatoire
@@ -63,7 +82,8 @@ class Position implements Comparable<Position>{ // Modele
     public static Position randPos(int minH, int maxH, int minW, int maxW){
         return new Position((int)(1+Math.random()*(maxH-minH)+minH), (int)(1+Math.random()*(maxW-minW)+minW));
     }
-    /*
+
+    /**
     * Comparaison simplifiee de deux positions
     * 
     * @param Object o  une autre position

@@ -2,7 +2,7 @@ package PAKITO;
 
 public class Glue extends Fixed { // Modele
     public Glue() {
-        setStr('G');
+        setStr('~');
     }
 
     @Override

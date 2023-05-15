@@ -5,7 +5,7 @@ public class Border extends Fixed{ // Modele
         setStr(c);
     }
 
-    /*
+    /**
      * Rediriger le personnage façon miroir
      */
     @Override
@@ -60,7 +60,7 @@ public class Border extends Fixed{ // Modele
     }
     
     public boolean isVertical(Position pos) {
-    	return (pos.getCol()==0)||(pos.getCol()==Position.MAX_WIDTH-1);
+    	return (pos.getCol()==0)||(pos.getCol()==Position.getMAX_WIDTH()-1);
     }
 }
 

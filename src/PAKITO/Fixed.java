@@ -2,7 +2,7 @@ package PAKITO;
 
 abstract class Fixed extends Piece { // Modele
 
-    /*
+    /**
      * Pour la piece fixe actuelle, avec l'interface Questionnable
      * cette fonction fait bouger le chasseur sur la case de 
      * la piece fixe et supprime le chasseur de sa case précédente

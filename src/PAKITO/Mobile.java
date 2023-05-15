@@ -4,7 +4,7 @@ abstract class Mobile extends Piece implements Moveable{ // Modele
     int dir;
     int wait_time;
 
-    /*
+    /**
      * Donne une direction aleatoire
      * 
      * @return int  la direction 
@@ -14,7 +14,11 @@ abstract class Mobile extends Piece implements Moveable{ // Modele
         return (int)(1+Math.random()*7);
     }
 
-    /*
+    public void setDir(int direction) {
+    	dir = direction;
+    }
+
+    /**
      * Calcule la nouvelle position d'un déplacement
      * dans une direction donnée 
      * 
