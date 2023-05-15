@@ -48,7 +48,7 @@ public class Game { // Vue
     }
 
     public void printGrid(int round){
-        System.out.print("\033[H\033[2J");  
+        System.out.print("\033[H\033[2J"); // Clear l'invite de commande
         System.out.flush(); 
 
         System.out.println("TOUR N°"+(int)(round+1)+" -----------");
