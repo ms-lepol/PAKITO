@@ -109,8 +109,12 @@ class Position implements Comparable<Position>{
     	if (row-o.getRow()==0) {
     		return (col<o.getCol()) ? 1:5 ;
     	}
-    	return 1;
-    }
+    	if (o.getRow()<row) {
+    		return (o.getCol()<col) ? 4:2;
+    	} else {
+    		return (o.getCol()<col) ? 6:8;
+    	}
+   }
     
     @Override
     public String toString() {
