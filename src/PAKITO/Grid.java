@@ -3,6 +3,8 @@ import java.util.*;
 
 public class Grid {
 	Map<Position,LinkedList<Piece>> Grid;
+
+	private Controleur c;
 	
 	static private final int NB_WALLS_MIN = 2;
 	static private final int NB_WALLS_MAX = 4;
@@ -10,6 +12,8 @@ public class Grid {
 	static private final int LEN_WALL_MAX =  6;
 	
 	public Grid(){
+		c = new Controleur();
+
 		Grid = new HashMap<Position,LinkedList<Piece>>();
 		initEmptyGrid();
 		initWalls();
@@ -231,31 +235,8 @@ public class Grid {
 	 * Fonction d'update de la grille qui va
 	 * bouger tous les personnages Mobiles
 	 */
-	public void update(){
-		List<Mobile> actionList = new ArrayList<Mobile>();
-		List<Position> removeList = new ArrayList<Position>();
-
-		for (Position key : Grid.keySet()) {
-			Piece p = getPiece(key);
-			if(p == null || !(p instanceof Mobile)){
-				continue;
-			}
-			actionList.add((Mobile)p);
-		}
-		for(Mobile piece : actionList){
-			piece.move(this);
-		}
-
-		// Parcours enlever toutes les positions
-		// contenant une liste vide
-		for (Position key : Grid.keySet()) {
-			if(Grid.get(key).isEmpty()){
-				removeList.add(key);
-			}
-		}
-		for(Position pos : removeList){
-			Grid.remove(pos);
-		}
+	public void update(Mobile p){
+		
 
 
 	}

@@ -4,7 +4,6 @@ import java.util.LinkedList;
 
 public class Hunter extends Mobile {
     static private int nb = 0;
-    private Grid g;
     private boolean treasure_found = false;
     private boolean have_tool = false;
 
@@ -18,10 +17,6 @@ public class Hunter extends Mobile {
 
     public int getDir(){
         return dir;
-    }
-
-    public Grid getGrid(){
-        return g;
     }
 
     public boolean getHave_Tool(){
@@ -49,15 +44,13 @@ public class Hunter extends Mobile {
     }
 
     @Override
-    public void move(Grid g){
-        this.g = g;
-
+    public void move(Controleur c){
         if(wait_time > 0){
             wait_time--;
             return;
         }
 
-        Position startPos = g.getPos(this);
+        Position startPos = c.getGrid().getPos(this);
 		Position endPos = this.getNextPos(startPos,dir);
 
         if(!(endPos.isValid())){
@@ -65,7 +58,7 @@ public class Hunter extends Mobile {
             return;
         }
 
-        Piece target = g.getPiece(endPos);
+        Piece target = c.getGrid().getPiece(endPos);
 
         if(target == null){
             // Position libre

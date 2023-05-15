@@ -1,24 +1,35 @@
 package PAKITO;
 
-public class Game {
+public class Game { // Vue
+    private Grid g;
+    private Controleur c;
+
     private boolean finish = false;
     private final int N_ROUND = 20; 
 
     public Game(){
-        Grid g = new Grid();
-        Hunter h;
+        g = new Grid();
+        c = new Controleur();
+
+        Hunter winner;
         //System.out.println(g.toString());
         wait(1);
+        //while(!finish){
+        for(int round = 0; round < N_ROUND; round++){
+            System.out.flush();
+
+            c.gridUpdate();
+
         int round = 0;
         while(!finish){
         //for(int round = 0; round < N_ROUND; round++){
             g.update();
             System.out.println("------------------------------------ TOUR N°"+(int)(round+1)+" ------------------------------------");
             
-            System.out.println(g.toString());
+            System.out.println(c.getGrid().toString());
             
-            h = g.foundTreasure();
-            if(h != null){
+            winner = g.foundTreasure();
+            if(winner != null){
                 finish = true;
                 break;
             }
@@ -27,7 +38,15 @@ public class Game {
         }
         System.out.println("------------ FIN DU JEU ------------");
         //System.out.println("------------ "+h.toString()+" Gagne la partie ------------");
-        //}
+        System.out.print("\n");
+    }
+
+    public Controleur getCtrl() {
+        return c;
+    }
+
+    public Grid getGrid() {
+        return g;
     }
 
     /*
