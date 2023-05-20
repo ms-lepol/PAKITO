@@ -2,8 +2,8 @@
  * 
  */
 /**
- * @author ms-lepol
+ * @author lefou
  *
  */
-module PAKITO {
+module pakito_eclipse {
 }
