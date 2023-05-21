@@ -5,7 +5,7 @@ package modele;
 
 public class Stone extends Fixed { // Modele
     public Stone() {
-        setStr('\u25A0');
+        setStr('\u2588');
     }
 
     /**
@@ -19,7 +19,7 @@ public class Stone extends Fixed { // Modele
     @Override
     public void process(Hunter h) {
         if (h.getHave_Tool()) {
-        	this.moveHunter(h);
+        	moveHunter(h);
         	h.setHave_Tool(false);
         	return;
         }

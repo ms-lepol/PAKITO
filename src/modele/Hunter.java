@@ -37,6 +37,10 @@ public class Hunter extends Mobile { // Modele
         return treasure_found;
     }
 
+    public int getWait_Time(){
+        return wait_time;
+    }
+
     public void setHave_Tool(boolean have_tool) {
         this.have_tool = have_tool;
     }
@@ -94,15 +98,46 @@ public class Hunter extends Mobile { // Modele
         return false;
 	}
 
+    /** Action lors de la rencontre de deux chasseurs
+     * Un dé est tiré
+     * 
+     * Si le resultat est strictement
+     * supérieur à 3, le chasseur qui bloque le passage
+     * recule et celui qui a lancé process avance 
+     * 
+     * Sinon le chasseur actuel change de direction.
+     * 
+     * @param h     le chasseur croisé
+     */
+	@Override
+	public void process(Hunter h) {
+		int de = (int)Math.random()*6;
+		if(de > 3) {
+			h.setDir(Position.getReverseDir(h.getDir()));
+			h.move();
+			h.setDir(Position.getReverseDir(h.getDir()));
+			h.setWait_time(h.getWait_Time()+1);
+			this.move();
+		}else {
+            int curr = this.getDir();
+            int next = this.getRandDir();
+            while(curr == next){
+                next = this.getRandDir();
+            }
+			this.setDir(next);
+			this.move();
+		}
+	}
+
     /** Change de direction a la rencontre d'un autre chasseur
      * 
      * Provisoire
      * 
      * @param h     le chasseur croisé
      */
-	@Override
+	/*@Override
 	public void process(Hunter h) {
 		h.dir = h.getRandDir();
 		h.move();
-	}
+	}*/
 }

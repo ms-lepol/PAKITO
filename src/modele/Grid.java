@@ -131,8 +131,8 @@ public class Grid { // Modele
 			li.add(new Glue());
 		}
 		li.add(new Treasure());
-		initRoadMap();
 		initPieces(li);
+		initRoadMap();
 	}
 	
 	public void initWall() {
@@ -217,9 +217,10 @@ public class Grid { // Modele
 			while(!isPlaced){
 				Position rPos = Position.randPos();
 				if(isEmpty(rPos) && treasurePos.directionTo(rPos)!=0){
+					System.out.println(rPos.toString()+" direction au tresor "+treasurePos.directionTo(rPos));
 					// Case libre
 					LinkedList<Piece> li = new LinkedList<Piece>();
-					li.addLast(new RoadMap());
+					li.addLast(new RoadMap(Position.getReverseDir(treasurePos.directionTo(rPos))));
 					Grid.put(rPos, li);
 					isPlaced = true;
 				}
@@ -259,10 +260,11 @@ public class Grid { // Modele
 	 * @param Piece p
 	 * 
 	 * @return Position 
+	 * 
 	 */
 	public Position getPos(Piece p){
 		for (Map.Entry<Position, LinkedList<Piece>> entry : Grid.entrySet()) {
-			if (!(entry.getValue().isEmpty()) && p.equals(entry.getValue().getLast())){
+			if (!(entry.getValue().isEmpty()) && Objects.equals(p, entry.getValue().getLast())){
 				return entry.getKey();
 			}
 		}

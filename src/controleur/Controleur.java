@@ -84,7 +84,6 @@ public class Controleur {
     /** Met toute la grille a jour */
     public void gridUpdate(){
         LinkedList<Mobile> actionList = game.getGrid().getLiHunter();
-        Mobile notif = null;
 
         for(Mobile piece : actionList){
             boolean b = updatePiece(piece);
@@ -92,16 +91,15 @@ public class Controleur {
                 clearEmpty();
                 printGrid();
             }
-            if(((Hunter) piece).getTreasure_found()){
-                notif = piece;
+            if(((Hunter) piece).getHave_Tool()){
+                game.addInfo(piece.toString() + " possède un outil");
+            }
+            if(((Hunter) piece).getWait_Time() > 0){
+                game.addInfo(piece.toString() + " est bloqué !");
             }
             if(((Hunter) piece).getTreasure_found()){
                 return;
             }
-        }
-
-        if(notif!=null){
-            game.notifTool(notif); // Probleme de flush instantané
         }
     }
 
@@ -113,5 +111,4 @@ public class Controleur {
             piece.setDir(piece.getRandDir());
         }
     }
-
 }

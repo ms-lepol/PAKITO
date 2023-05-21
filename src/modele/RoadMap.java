@@ -2,21 +2,19 @@ package modele;
 
 
 public class RoadMap extends Fixed{ // Modele
-    public RoadMap(){
+    private int dirToTreasure;
+
+    public RoadMap(int n){
         setStr('%');
-    }
-    
-    public int getTreasureDirection(Grid g) {
-    	Position roadMapPos = g.getPos(this);
-    	Position treasurePos = g.getTreasurePosition();
-    	
-    	return roadMapPos.directionTo(treasurePos);
+        dirToTreasure = n;
     }
     
     @Override
     public void process(Hunter h) {
         // Besoin de la direction du trésor
-    	h.setDir(getTreasureDirection(h.getCtrl().getGame().getGrid()));
-    	moveHunter(h);
+        System.out.println(h.getDir());
+    	h.setDir(dirToTreasure);
+        System.out.println(h.getDir());
+        moveHunter(h);
     }
 }

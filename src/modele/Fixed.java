@@ -17,6 +17,7 @@ abstract class Fixed extends Piece { // Modele
         h.getCtrl().getGame().getGrid().removeLast(h.getCtrl().getGame().getGrid().getPos(h));
 
         Position pos = h.getCtrl().getGame().getGrid().getPos(this);
+        System.out.println("Piece = " + pos.toString());
         h.getCtrl().getGame().getGrid().addPiece(h, pos);
     }
 }

@@ -145,6 +145,21 @@ public class Position implements Comparable<Position>{ // Modele
     	return 0;
     	
     }	
+
+    /**
+     * renvoie la direction inverse par rapport a l'actuelle
+     * 
+     * @param int curr  la direction de base
+     * 
+     * @return int      la direction inverse
+     */
+    static public int getReverseDir(int curr){
+    	if(curr < 5) {
+    		return curr+4;
+    	}else {
+    		return curr-4;
+    	}
+    }
     
     @Override
     public String toString() {

@@ -1,5 +1,6 @@
 package vue;
 
+import java.util.*;
 import controleur.*;
 import modele.*;
 
@@ -11,10 +12,12 @@ public class Game { // Vue
 
     private boolean finish = false;
     private int round; 
+    private List<String> info;
 
     /* Constructeur */
     public Game(Controleur c){
         this.c = c;
+        this.info = new LinkedList<String>();
     }
 
     /* Getter & Setter */
@@ -40,9 +43,9 @@ public class Game { // Vue
         printGrid(round);
 
         while(!finish){
-            if(round % 20 == 0){
+            /*if(round % 20 == 0){
                 c.randAllDir();
-            }
+            }*/
 
             c.gridUpdate();
             
@@ -52,6 +55,7 @@ public class Game { // Vue
                 break;
             }
 
+            this.info.clear();
             round++;
         }
         printGrid(round);
@@ -68,10 +72,11 @@ public class Game { // Vue
      */
     public void printGrid(int round){
         System.out.print("\033[H\033[2J"); // Clear l'invite de commande
-        System.out.flush(); 
+        System.out.flush();                // (ne fonctionne pas sur tous les systemes)
 
         System.out.println("TOUR N°"+(int)(round)+" -----------");
         System.out.println(g.toString());
+        printInfo();
 
         wait(0.5);
     }
@@ -96,5 +101,15 @@ public class Game { // Vue
         } catch (InterruptedException e) {
             Thread.currentThread().interrupt();
         }
+    }
+
+    public void addInfo(String i) {
+    	this.info.add(i);
+    }
+    
+    public void printInfo() {
+    	for(String i : info) {
+    		System.out.println(i);
+    	}
     }
 }
