@@ -1,7 +1,6 @@
 package vue;
 
 import java.util.*;
-import javax.swing.*;
 
 import controleur.*;
 import modele.*;
@@ -19,9 +18,7 @@ public class Game { // Vue
     /* Constructeur */
     public Game(Controleur c){
         this.c = c;
-        this.info = new LinkedList<String>();
-        
-        JFrame frame = new JFrame();
+        this.info = new LinkedList<String>();        
     }
 
     /* Getter & Setter */

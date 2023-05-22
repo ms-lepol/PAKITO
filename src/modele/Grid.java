@@ -17,7 +17,7 @@ public class Grid { // Modele
 	static private int NB_ROADMAP = 3;
 	static private int NB_TOOL = 3;
 	static private int NB_GLUE = 3;
-	private int NB_HUNTER = 3;
+	private int NB_HUNTER = 1;
 	private LinkedList<Mobile> liHunter;
 	
 	/* Constructeur */
@@ -47,7 +47,7 @@ public class Grid { // Modele
 		NB_WALLS_MIN = area/100;
 		NB_WALLS_MAX = 2*NB_WALLS_MIN;
 		LEN_WALL_MAX = (Position.getMAX_HEIGHT()<Position.getMAX_WIDTH()) ? (int)(Position.getMAX_HEIGHT()/2):(int)(Position.getMAX_WIDTH()/2);
-		NB_ROADMAP = area/50;
+		NB_ROADMAP = 8;
 		NB_TOOL = area/50;
 		NB_GLUE = area/40;
 		

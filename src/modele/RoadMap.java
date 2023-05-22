@@ -12,9 +12,7 @@ public class RoadMap extends Fixed{ // Modele
     @Override
     public void process(Hunter h) {
         // Besoin de la direction du trésor
-        System.out.println(h.getDir());
     	h.setDir(dirToTreasure);
-        System.out.println(h.getDir());
         moveHunter(h);
     }
 }
