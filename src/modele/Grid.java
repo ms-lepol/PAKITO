@@ -217,7 +217,6 @@ public class Grid { // Modele
 			while(!isPlaced){
 				Position rPos = Position.randPos();
 				if(isEmpty(rPos) && treasurePos.directionTo(rPos)!=0){
-					System.out.println(rPos.toString()+" direction au tresor "+treasurePos.directionTo(rPos));
 					// Case libre
 					LinkedList<Piece> li = new LinkedList<Piece>();
 					li.addLast(new RoadMap(Position.getReverseDir(treasurePos.directionTo(rPos))));
