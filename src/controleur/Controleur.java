@@ -2,16 +2,20 @@ package controleur;
 
 import vue.*;
 import modele.*;
+
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.*;
 
-public class Controleur {
-
+public class Controleur implements ActionListener{
     /* Attribut */
     private Game game;
-
+	private Fenetre window;
+	
     /* Constructeur */
     public Controleur(){
         game = new Game(this);
+        this.window = new Fenetre(this);
     }
 
     /* Getter & Setter */
@@ -111,4 +115,10 @@ public class Controleur {
             piece.setDir(piece.getRandDir());
         }
     }
+
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		// TODO Auto-generated method stub
+		if (e.getSource()==windows
+	}
 }
