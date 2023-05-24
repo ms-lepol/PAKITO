@@ -3,27 +3,49 @@ package vue;
 import controleur.Controleur;
 
 import java.awt.*;
-import java.util.HashMap;
-import java.util.Map;
-
 import javax.swing.*;
 
 public class Fenetre {
     private Controleur c;
     private JFrame screen;
-    private Map<String,String> srcAssets;
-    
+    private GridPanel imageFrame;
     private JButton start,quit,nextTurn,pause;
+    
+    private int sizeTile = 32;
+    
+    public JFrame getScreen() {
+		return screen;
+	}
+
+	public GridPanel getImageFrame() {
+		return imageFrame;
+	}
+
+	public JButton getStart() {
+		return start;
+	}
+	public JButton getQuit() {
+		return quit;
+	}
+	public JButton getNextTurn() {
+		return nextTurn;
+	}
+
+	public JButton getPause() {
+		return pause;
+	}
+
+	
     
     public Fenetre(Controleur c) {
         this.c = c;
-        initRessources();
+        
         initTitleScreen();
     }
     
     public void initTitleScreen() {
         this.screen = new JFrame();
-        screen.setSize(200, 200);
+        screen.setSize(840, 840);
         
         Container ctn = screen.getContentPane();
         ctn.setLayout(new GridLayout(3,1));
@@ -32,9 +54,10 @@ public class Fenetre {
         JLabel title = new JLabel("PAKITO");
         JPanel midFrame = new JPanel();
         this.start = new JButton("Jouer");
+        this.start.addActionListener(c);
         JPanel botFrame = new JPanel();
         this.quit = new JButton("Quitter");
-        
+        this.quit.addActionListener(c);
         topFrame.add(title);
         midFrame.add(this.start);
         botFrame.add(this.quit);
@@ -42,62 +65,58 @@ public class Fenetre {
         ctn.add(topFrame);
         ctn.add(midFrame);
         ctn.add(botFrame);
-        
-        
-        screen.setVisible(true);
+        topFrame.setSize(840, 100);
+        topFrame.setBackground(Color.black);
+        midFrame.setBackground(Color.black);
+        botFrame.setBackground(Color.black);
+        screen.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }
-    
+    public void open() {
+    	screen.setVisible(true);
+    }
     public void flush() {
     	Container ctn = screen.getContentPane();
     	ctn.removeAll();
     }
     
     public void initGameScreen() {
+    	 flush();
+    	 screen.setBackground(Color.black);
     	 Container ctn = screen.getContentPane();
          ctn.setLayout(new GridLayout(3,1));
+         ctn.setSize(840,840);
          
          JPanel topFrame = new JPanel();
          JLabel title = new JLabel("PAKITO");
          
          JPanel midFrame = new JPanel();
-         JPanel imageFrame = new JPanel();
+         this.imageFrame = new GridPanel(c);
          JTextArea feed = new JTextArea();
          
          JPanel botFrame = new JPanel();
-         this.nextTurn = new JButton("Tour Suivant");
+         this.quit = new JButton("Quitter");
          this.pause = new JButton("Pause");
-         
+         this.pause.addActionListener(c);
+         this.quit.addActionListener(c);
          topFrame.add(title);
          
          midFrame.add(imageFrame);
          midFrame.add(feed);
          
-         botFrame.add(nextTurn);
+         botFrame.add(quit);
          botFrame.add(pause);
          
+         topFrame.setBackground(Color.red);
+         midFrame.setBackground(Color.black);
+         botFrame.setBackground(Color.black);
+         topFrame.setPreferredSize(new Dimension(840,100));
+         midFrame.setSize(840, 640);
+         botFrame.setPreferredSize(new Dimension(840,100));
          ctn.add(topFrame);
          ctn.add(midFrame);
          ctn.add(botFrame);
          
-         screen.setVisible(true);
+         screen.pack();
     }
-    public void initRessources(){
-    	this.srcAssets = new HashMap<String,String>();
-    	srcAssets.put("stone", "../../assets/stone.png");
-    	srcAssets.put("glue", "../../assets/glue.png");
-    	srcAssets.put("roadmap", "../../assets/roadmap.png");
-    	srcAssets.put("treasure", "../../assets/treasure.png");
-    	srcAssets.put("tool", "../../assets/tool.png");
-    	srcAssets.put("hunterA", "../../assets/hunterA.png");
-    	srcAssets.put("hunterB", "../../assets/hunterB.png");
-    	srcAssets.put("hunterC", "../../assets/hunterC.png");
-    	srcAssets.put("hunterD", "../../assets/hunterD.png");
-    	srcAssets.put("hunterE", "../../assets/hunterE.png");
-    	srcAssets.put("borderV", "../../assets/borderV.png");
-    	srcAssets.put("borderH", "../../assets/borderH.png");
-    	srcAssets.put("borderHG", "../../assets/borderHG.png");
-    	srcAssets.put("borderHD", "../../assets/borderHD.png");
-    	srcAssets.put("borderBD", "../../assets/borderBD.png");
-    	srcAssets.put("borderBG", "../../assets/borderBG.png");
-    }
+  
 }

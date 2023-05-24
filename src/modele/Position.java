@@ -2,8 +2,8 @@ package modele;
 
 
 public class Position implements Comparable<Position>{ // Modele
-    private static int MAX_WIDTH = 20;
-    private static int MAX_HEIGHT = 20;
+    private static int MAX_WIDTH = 30;
+    private static int MAX_HEIGHT = 30;
     private int row;
     private int col;
 

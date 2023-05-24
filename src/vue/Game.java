@@ -14,7 +14,7 @@ public class Game { // Vue
     private boolean finish = false;
     private int round; 
     private List<String> info;
-
+    private boolean pause = true;
     /* Constructeur */
     public Game(Controleur c){
         this.c = c;
@@ -35,7 +35,13 @@ public class Game { // Vue
     }
 
     /* Methodes */
-
+    public void pause() {
+    	this.pause= !pause;
+    }
+    
+    public boolean isPaused() {
+    	return pause;
+    }
     public void startGame(){
         round = 1;
         g = new Grid(c);
@@ -44,6 +50,9 @@ public class Game { // Vue
         printGrid(round);
 
         while(!finish){
+        	while(pause) {
+        		wait(0.5);
+        	}
             /*if(round % 20 == 0){
                 c.randAllDir();
             }*/

@@ -16,6 +16,7 @@ public class Controleur implements ActionListener{
     public Controleur(){
         game = new Game(this);
         this.window = new Fenetre(this);
+        window.open();
     }
 
     /* Getter & Setter */
@@ -91,7 +92,9 @@ public class Controleur implements ActionListener{
 
         for(Mobile piece : actionList){
             boolean b = updatePiece(piece);
+           
             if(b){
+            	window.getImageFrame().repaint();
                 clearEmpty();
                 printGrid();
             }
@@ -105,6 +108,7 @@ public class Controleur implements ActionListener{
                 return;
             }
         }
+       
     }
 
     /** Randomise la direction de toutes les pieces mobiles */
@@ -118,7 +122,17 @@ public class Controleur implements ActionListener{
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		// TODO Auto-generated method stub
-		if (e.getSource()==windows
+		if (e.getSource()==this.window.getStart()) {
+			window.initGameScreen();
+			game.pause();
+		}
+		if (e.getSource()==this.window.getQuit()) {
+			System.exit(0);
+		}
+		if (e.getSource()==this.window.getPause()) {
+			game.pause();
+			String txtButton = (game.isPaused()) ? "Continue" : "Pause";
+			this.window.getPause().setText(txtButton);
+		}
 	}
 }

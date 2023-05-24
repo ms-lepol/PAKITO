@@ -17,7 +17,7 @@ public class Grid { // Modele
 	static private int NB_ROADMAP = 3;
 	static private int NB_TOOL = 3;
 	static private int NB_GLUE = 3;
-	private int NB_HUNTER = 1;
+	private int NB_HUNTER = 5;
 	private LinkedList<Mobile> liHunter;
 	
 	/* Constructeur */

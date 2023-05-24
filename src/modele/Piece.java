@@ -1,7 +1,7 @@
 package modele;
 
 
-abstract class Piece implements Questionnable{ // Modele
+public abstract class Piece implements Questionnable{ // Modele
     char str;
 
     public void setStr(char str) {
