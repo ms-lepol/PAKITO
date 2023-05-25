@@ -18,7 +18,6 @@ public class GridPanel extends JPanel {
 	private Controleur c;
 	private TileManager tileM;
 	
-	private Thread GameThread;
 	GridPanel(Controleur c){
 		this.c = c;
 		this.tileM = new TileManager(this,c);

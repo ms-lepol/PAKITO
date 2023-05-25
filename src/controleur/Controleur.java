@@ -39,7 +39,9 @@ public class Controleur implements ActionListener{
     public void setNbHunter(int n){
         game.getGrid().setNB_HUNTER(n);
     }
-
+    public Fenetre getWindow() {
+    	return window;
+    }
     /* Methodes */
 
     public void startGame(){
@@ -94,24 +96,26 @@ public class Controleur implements ActionListener{
             boolean b = updatePiece(piece);
            
             if(b){
-            	window.getImageFrame().repaint();
                 clearEmpty();
-                printGrid();
+                window.getImageFrame().repaint();
+                //printGrid();
             }
             if(((Hunter) piece).getHave_Tool()){
-                game.addInfo(piece.toString() + " possède un outil");
+                game.addInfo(piece.toString() + " possède un outil\n");
+                
             }
             if(((Hunter) piece).getWait_Time() > 0){
-                game.addInfo(piece.toString() + " est bloqué !");
+                game.addInfo(piece.toString() + " est bloqué !\n");
+                
             }
             if(((Hunter) piece).getTreasure_found()){
                 return;
             }
         }
-       
+       game.wait(0.5);
     }
 
-    /** Randomise la direction de toutes les pieces mobiles */
+    /** Randomize la direction de toutes les pieces mobiles */
     public void randAllDir(){
         LinkedList<Mobile> actionList = game.getGrid().getLiHunter();
 

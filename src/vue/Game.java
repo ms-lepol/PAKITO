@@ -47,7 +47,7 @@ public class Game { // Vue
         g = new Grid(c);
         
         Hunter winner = null;
-        printGrid(round);
+        //printGrid(round);
 
         while(!finish){
         	while(pause) {
@@ -64,14 +64,14 @@ public class Game { // Vue
                 finish = true;
                 break;
             }
-
+            printInfo();
             this.info.clear();
             round++;
         }
-        printGrid(round);
-        System.out.println("FIN DU JEU ---------");
-        System.out.println(winner.toString()+" Gagne la partie --");
-        System.out.print("\n");
+        //printGrid(round);
+        c.getWindow().getFeed().append("-- FIN DU JEU --\n");
+        c.getWindow().getFeed().append(winner.toString()+" Gagne la partie --");
+        
     }
 
     /** Vide d'abord le terminal puis affiche la grille
@@ -119,7 +119,7 @@ public class Game { // Vue
     
     public void printInfo() {
     	for(String i : info) {
-    		System.out.println(i);
+    		c.getWindow().getFeed().append(i);;
     	}
     }
 }

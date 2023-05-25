@@ -89,7 +89,7 @@ public class TileManager {
 	}
 
 	public void draw(Graphics2D g2) {
-		g2.setColor(Color.red);
+		try {
 		Map<Position, LinkedList<Piece>> grid = c.getGame().getGrid().getGrid();
 		for(Map.Entry<Position, LinkedList<Piece>> entry : grid.entrySet()){
 			LinkedList<Piece> li= entry.getValue();
@@ -161,6 +161,9 @@ public class TileManager {
 				}
 
 			}
+		}
+		} catch (Exception e) {
+			
 		}
 	}
 }
