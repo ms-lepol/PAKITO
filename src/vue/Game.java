@@ -19,7 +19,8 @@ public class Game { // Vue
     /* Constructeur */
     public Game(Controleur c){
         this.c = c;
-        this.info = new LinkedList<String>();        
+        this.info = new LinkedList<String>();    
+        g = new Grid(c);
     }
 
     /* Getter & Setter */
@@ -45,18 +46,14 @@ public class Game { // Vue
     }
     public void startGame(){
         round = 1;
-        g = new Grid(c);
         pause=true;
+        finish=false; // double verification
         Hunter winner = null;
         //printGrid(round);
-
         while(!finish){
         	while(pause) {
         		wait(0.5);
         	}
-            /*if(round % 20 == 0){
-                c.randAllDir();
-            }*/
 
             c.gridUpdate();
             
@@ -72,7 +69,6 @@ public class Game { // Vue
         //printGrid(round);
         c.getWindow().getFeed().append("-- FIN DU JEU --\n");
         c.getWindow().getFeed().append(winner.getCol()+" gagne la partie --");
-        
     }
 
     /** Vide d'abord le terminal puis affiche la grille
@@ -123,4 +119,16 @@ public class Game { // Vue
     		c.getWindow().getFeed().append(i);;
     	}
     }
+
+	public void reset() {
+	    round = 1; 
+		info = new LinkedList<String>();
+		finish = false;
+		pause = true;
+		g.reset();
+	}
+
+	public void setPause(boolean b) {
+		this.pause = b;
+	}
 }

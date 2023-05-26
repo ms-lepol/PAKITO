@@ -43,6 +43,13 @@ public class Grid { // Modele
 	}
 
 	/* Methodes */
+	
+	/**
+	 * Calcule le nombre de piece de chaque types 
+	 * par rapport a l'aire du plateau 
+	 * 
+	 * @param area 	l'aire du plateau
+	 */
 	public void calculateNBPiece(int area) {
 		NB_WALLS_MIN = area/100;
 		NB_WALLS_MAX = 2*NB_WALLS_MIN;
@@ -52,6 +59,10 @@ public class Grid { // Modele
 		NB_GLUE = area/40;
 		
 	}
+	
+	/*Toutes les fonctions init...() permettent d'initialiser 
+	 * certains object dans la grille
+	 */
 	public void initEmptyGrid(){
 
 		for(int row = 0; row < Position.getMAX_HEIGHT(); row++){
@@ -120,6 +131,9 @@ public class Grid { // Modele
 		liHunter = li;
 	}
 
+	/**
+	 * Remplit la grille avec les pieces initialisées
+	 */
 	public void fillGrid(){
 		List<Piece> li = new ArrayList<>();
 		initWalls();
@@ -141,7 +155,7 @@ public class Grid { // Modele
 		boolean isPlaced = false;
 		while(!isPlaced) {
 			int lenWall = (int)(Math.random()*(LEN_WALL_MAX-LEN_WALL_MIN)+1+LEN_WALL_MIN);
-			boolean isVertical = Math.random() < 0.5;
+			boolean isVertical = Math.random() <= 0.5; // 1/2 chance
 			canBePlaced = true;
 			Position initPos = Position.randPos(2,Position.getMAX_HEIGHT()-3,2,Position.getMAX_WIDTH()-3);
 			if(isStoneValid(initPos)) {
@@ -185,6 +199,12 @@ public class Grid { // Modele
 		}
 	}
 	
+	/**
+	 * Dit si la position de la pierre est valide
+	 * 
+	 * @param p 	la position de la Stone
+	 * @return boolean
+	 */
 	public boolean isStoneValid(Position p) {
 		if (!(p.getCol()<Position.getMAX_WIDTH()-2&&p.getCol()>1&&
 			  p.getRow()<Position.getMAX_HEIGHT()-2&&p.getRow()>1)) {
@@ -194,6 +214,7 @@ public class Grid { // Modele
 		if (!isEmpty(p)) {
 			return false;
 		}
+		// Height Directions
 		if (!isEmpty(new Position(p.getRow()+1,p.getCol()))) {
 			return false;
 		}
@@ -204,6 +225,18 @@ public class Grid { // Modele
 			return false;
 		}
 		if (!isEmpty(new Position(p.getRow(),p.getCol()-1))) {
+			return false;
+		}
+		if (!isEmpty(new Position(p.getRow()-1,p.getCol()-1))) {
+			return false;
+		}
+		if (!isEmpty(new Position(p.getRow()-1,p.getCol()+1))) {
+			return false;
+		}
+		if (!isEmpty(new Position(p.getRow()+1,p.getCol()-1))) {
+			return false;
+		}
+		if (!isEmpty(new Position(p.getRow()+1,p.getCol()+1))) {
 			return false;
 		}
 		return true;
@@ -255,6 +288,8 @@ public class Grid { // Modele
 
 	/** Donne la position associee a la piece donnee
 	 * Attention la piece est connue car on utilise son adresse mémoire
+	 * (Cette fonction ne marche pas en utilisant une piece qui n'est
+	 * pas dans la grille)
 	 * 
 	 * @param Piece p
 	 * 
@@ -338,5 +373,23 @@ public class Grid { // Modele
 			}
 		}
 		return str;
+	}
+
+	public void reset() {
+		NB_WALLS_MIN = 2;
+		NB_WALLS_MAX = 4;
+		LEN_WALL_MIN =  2;
+		LEN_WALL_MAX =  6;
+		NB_ROADMAP = 3;
+		NB_TOOL = 3;
+		NB_GLUE = 3;
+		NB_HUNTER = 5;
+		liHunter = null;
+		
+		Hunter.resetNb();
+		calculateNBPiece(Position.getArea());
+		Grid = new HashMap<Position,LinkedList<Piece>>();
+		initEmptyGrid();
+		fillGrid();
 	}
 }

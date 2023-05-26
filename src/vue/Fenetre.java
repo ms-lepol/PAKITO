@@ -15,6 +15,7 @@ public class Fenetre {
     private JTextArea feed;
     private int sizeTile = 32;
     private Font digitalDisco;
+    
     public JFrame getScreen() {
 		return screen;
 	}
@@ -164,5 +165,27 @@ public class Fenetre {
 
 
     }
+
+	public void reset() {
+	    this.imageFrame = null;
+	    this.start = null;
+	    this.quit = null;
+	    this.nextTurn = null;
+	    this.pause = null;
+	    this.reset  = null;
+	    this.feed = null;
+	    this.sizeTile = 32;
+	    this.digitalDisco = null;
+		this.screen.dispose();
+		try {
+        	InputStream digitalDiscoFile =getClass().getResourceAsStream("/assets/DigitalDisco.ttf");
+        	digitalDisco = Font.createFont(Font.TRUETYPE_FONT, digitalDiscoFile);
+        	digitalDisco = digitalDisco.deriveFont((float) 16.0);
+        } catch(Exception e) {
+        	System.out.println("Font not found");
+        	e.printStackTrace();
+        };
+        initTitleScreen();
+	}
   
 }

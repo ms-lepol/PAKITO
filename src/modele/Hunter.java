@@ -26,6 +26,9 @@ public class Hunter extends Mobile { // Modele
     public int getDir(){
         return dir;
     }
+    public static void resetNb() {
+		Hunter.nb = 0;
+	}
     public ColorHunter getCol() {
     	return col;
     }
@@ -115,14 +118,17 @@ public class Hunter extends Mobile { // Modele
      */
 	@Override
 	public void process(Hunter h) {
-		int de = (int)Math.random()*6;
-		if(de > 3) {
+        c.getWindow().getFeed().append("------\n\n"+this.getCol()+" croise "+h.getCol()+"\n");
+		boolean win = Math.random() > 0.5;
+		if(win) {
+	        c.getWindow().getFeed().append(this.getCol()+" gagne la rencontre\n\n------\n");
 			h.setDir(Position.getReverseDir(h.getDir()));
 			h.move();
 			h.setDir(Position.getReverseDir(h.getDir()));
 			h.setWait_time(h.getWait_Time()+1);
 			this.move();
 		}else {
+	        c.getWindow().getFeed().append(this.getCol()+" perd la rencontre\n\n------\n");
             int curr = this.getDir();
             int next = this.getRandDir();
             while(curr == next){

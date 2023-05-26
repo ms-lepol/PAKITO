@@ -39,9 +39,11 @@ public class Controleur implements ActionListener{
     public void setNbHunter(int n){
         game.getGrid().setNB_HUNTER(n);
     }
+    
     public Fenetre getWindow() {
     	return window;
     }
+    
     /* Methodes */
 
     public void startGame(){
@@ -114,16 +116,14 @@ public class Controleur implements ActionListener{
         }
        game.wait(0.5);
     }
-
-    /** Randomize la direction de toutes les pieces mobiles */
-    public void randAllDir(){
-        LinkedList<Mobile> actionList = game.getGrid().getLiHunter();
-
-        for(Mobile piece : actionList){
-            piece.setDir(piece.getRandDir());
-        }
+    
+    // reset l'objet actuel
+    public void reset() {
+    	game.reset();
+        window.reset();
+        window.open();
     }
-
+    
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource()==this.window.getStart()) {
@@ -138,7 +138,8 @@ public class Controleur implements ActionListener{
 			this.window.getPause().setText(txtButton);
 		}
 		if(e.getSource()==this.window.getReset()) {
-			//this.game = new Game(this);
+			game.setPause(true);
+			reset();
 		}
 	}
 }
