@@ -5,6 +5,7 @@ import java.awt.*;
 import javax.swing.*;
 
 import controleur.Controleur;
+import controleur.TileManager;
 import modele.Position;
 
 public class GridPanel extends JPanel {
@@ -26,7 +27,7 @@ public class GridPanel extends JPanel {
 		this.setDoubleBuffered(true);
 	}
 	
-	int getTileSize() {
+	public int getTileSize() {
 		return tileSize*scale;
 	}
 	

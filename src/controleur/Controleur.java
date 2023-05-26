@@ -101,11 +101,11 @@ public class Controleur implements ActionListener{
                 //printGrid();
             }
             if(((Hunter) piece).getHave_Tool()){
-                game.addInfo(piece.toString() + " possède un outil\n");
+                game.addInfo(((Hunter) piece).getCol()+ " possède un outil\n");
                 
             }
             if(((Hunter) piece).getWait_Time() > 0){
-                game.addInfo(piece.toString() + " est bloqué !\n");
+                game.addInfo(((Hunter) piece).getCol()+ " est bloqué !\n");
                 
             }
             if(((Hunter) piece).getTreasure_found()){
@@ -128,7 +128,6 @@ public class Controleur implements ActionListener{
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource()==this.window.getStart()) {
 			window.initGameScreen();
-			game.pause();
 		}
 		if (e.getSource()==this.window.getQuit()) {
 			System.exit(0);
@@ -137,6 +136,9 @@ public class Controleur implements ActionListener{
 			game.pause();
 			String txtButton = (game.isPaused()) ? "Continue" : "Pause";
 			this.window.getPause().setText(txtButton);
+		}
+		if(e.getSource()==this.window.getReset()) {
+			//this.game = new Game(this);
 		}
 	}
 }

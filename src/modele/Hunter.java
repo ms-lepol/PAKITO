@@ -8,23 +8,27 @@ public class Hunter extends Mobile { // Modele
     private Controleur c;
 
     static private int nb = 0;
+    private ColorHunter col;
+    
     private boolean treasure_found = false;
     private boolean have_tool = false;
 
     public Hunter(Controleur c) {
         this.c = c;
-
+        ColorHunter tab[] = ColorHunter.values();
+        this.col = tab[nb];
         setStr((char)(65+nb));
         nb++;
 
         wait_time = 0;
         dir = getRandDir();
     }
-
     public int getDir(){
         return dir;
     }
-
+    public ColorHunter getCol() {
+    	return col;
+    }
     public Controleur getCtrl() {
         return c;
     }

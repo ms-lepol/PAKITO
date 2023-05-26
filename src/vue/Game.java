@@ -15,6 +15,7 @@ public class Game { // Vue
     private int round; 
     private List<String> info;
     private boolean pause = true;
+    
     /* Constructeur */
     public Game(Controleur c){
         this.c = c;
@@ -45,7 +46,7 @@ public class Game { // Vue
     public void startGame(){
         round = 1;
         g = new Grid(c);
-        
+        pause=true;
         Hunter winner = null;
         //printGrid(round);
 
@@ -70,7 +71,7 @@ public class Game { // Vue
         }
         //printGrid(round);
         c.getWindow().getFeed().append("-- FIN DU JEU --\n");
-        c.getWindow().getFeed().append(winner.toString()+" Gagne la partie --");
+        c.getWindow().getFeed().append(winner.getCol()+" gagne la partie --");
         
     }
 

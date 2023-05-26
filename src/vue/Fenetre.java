@@ -6,11 +6,12 @@ import java.awt.*;
 import javax.swing.*;
 import javax.swing.border.LineBorder;
 
+
 public class Fenetre {
     private Controleur c;
     private JFrame screen;
     private GridPanel imageFrame;
-    private JButton start,quit,nextTurn,pause;
+    private JButton start,quit,nextTurn,pause,reset;
     private JTextArea feed;
     private int sizeTile = 32;
     private Font digitalDisco;
@@ -27,6 +28,9 @@ public class Fenetre {
 	}
 	public JButton getQuit() {
 		return quit;
+	}
+	public JButton getReset() {
+		return reset;
 	}
 	public JButton getNextTurn() {
 		return nextTurn;
@@ -56,9 +60,10 @@ public class Fenetre {
     public void initTitleScreen() {
         this.screen = new JFrame();
         screen.setSize(840, 840);
-        
+        flush();
         Container ctn = screen.getContentPane();
         ctn.setLayout(new BoxLayout(ctn,BoxLayout.Y_AXIS));
+        
         ctn.setSize(new Dimension(840,840));
         TitlePanel topFrame = new TitlePanel();
         topFrame.setLayout(new FlowLayout());
@@ -89,6 +94,9 @@ public class Fenetre {
     public void flush() {
     	Container ctn = screen.getContentPane();
     	ctn.removeAll();
+    	for (Component c : ctn.getComponents()) {
+    		((Container) c).removeAll();
+    	}
     }
     
     public void initGameScreen() {
@@ -130,14 +138,19 @@ public class Fenetre {
          midFrame.setBackground(Color.black);
          midFrame.setSize(840, 640);
          
+         //BotFrame - Buttons 
          JPanel botFrame = new JPanel();
          this.quit = new JButton("Quitter");
-         this.pause = new JButton("Pause");
+         this.pause = new JButton("Go");
+         this.reset = new JButton("Reset");
          this.pause.addActionListener(c);
          this.quit.addActionListener(c);
+         this.reset.addActionListener(c);
+         
          botFrame.setBackground(Color.black);
          botFrame.add(quit);
          botFrame.add(pause);
+         botFrame.add(reset);
          botFrame.setPreferredSize(new Dimension(840,100));
          
          ctn.add(topFrame);
@@ -145,6 +158,11 @@ public class Fenetre {
          ctn.add(botFrame);
          
          screen.pack();
+    }
+    
+    public static void music() {
+
+
     }
   
 }

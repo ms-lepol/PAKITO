@@ -1,4 +1,4 @@
-package vue;
+package controleur;
 
 import java.awt.Color;
 import java.awt.Graphics2D;
@@ -10,7 +10,6 @@ import java.util.Map;
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 
-import controleur.Controleur;
 import modele.Border;
 import modele.Glue;
 import modele.Hunter;
@@ -20,6 +19,8 @@ import modele.RoadMap;
 import modele.Stone;
 import modele.Tool;
 import modele.Treasure;
+import vue.GridPanel;
+import vue.Tile;
 
 public class TileManager {
 	GridPanel gp;
@@ -163,7 +164,6 @@ public class TileManager {
 			}
 		}
 		} catch (Exception e) {
-			
 		}
 	}
 }
