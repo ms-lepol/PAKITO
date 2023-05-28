@@ -100,7 +100,7 @@ public class Controleur implements ActionListener{
             if(b){
                 clearEmpty();
                 window.getImageFrame().repaint();
-                //printGrid();
+                wait(0.25);
             }
             if(((Hunter) piece).getHave_Tool()){
                 game.addInfo(((Hunter) piece).getCol()+ " possède un outil\n");
@@ -114,7 +114,6 @@ public class Controleur implements ActionListener{
                 return;
             }
         }
-       game.wait(0.5);
     }
     
     // reset l'objet actuel
@@ -139,7 +138,16 @@ public class Controleur implements ActionListener{
 		}
 		if(e.getSource()==this.window.getReset()) {
 			game.setPause(true);
+			wait(0.5);
 			reset();
 		}
 	}
+	
+	public void wait(double sec){
+        try {
+            Thread.sleep((long)(sec*1000.0));
+        } catch (InterruptedException e) {
+            Thread.currentThread().interrupt();
+        }
+    }
 }

@@ -106,48 +106,33 @@ public class Hunter extends Mobile { // Modele
 	}
 
     /** Action lors de la rencontre de deux chasseurs
-     * Un dé est tiré
      * 
-     * Si le resultat est strictement
-     * supérieur à 3, le chasseur qui bloque le passage
+     * Si le chasseur actuel gagne, le chasseur qui bloque le passage
      * recule et celui qui a lancé process avance 
      * 
-     * Sinon le chasseur actuel change de direction.
+     * Sinon le chasseur actuel attend que l'autre passe
      * 
      * @param h     le chasseur croisé
      */
 	@Override
 	public void process(Hunter h) {
         c.getWindow().getFeed().append("------\n\n"+this.getCol()+" croise "+h.getCol()+"\n");
-		boolean win = Math.random() > 0.5;
+		boolean win = Math.random() >= 0.5;
 		if(win) {
 	        c.getWindow().getFeed().append(this.getCol()+" gagne la rencontre\n\n------\n");
 			h.setDir(Position.getReverseDir(h.getDir()));
-			h.move();
+			h.move(); // h recule 
+			c.clearEmpty(); // On evite d'avoir une case 'fantome'
 			h.setDir(Position.getReverseDir(h.getDir()));
 			h.setWait_time(h.getWait_Time()+1);
 			this.move();
+			c.clearEmpty();
 		}else {
 	        c.getWindow().getFeed().append(this.getCol()+" perd la rencontre\n\n------\n");
-            int curr = this.getDir();
-            int next = this.getRandDir();
-            while(curr == next){
-                next = this.getRandDir();
-            }
-			this.setDir(next);
-			this.move();
+            this.setWait_time(this.getWait_Time()+1);
+            h.move();
+            c.clearEmpty();
 		}
+		c.wait(0.5);
 	}
-
-    /** Change de direction a la rencontre d'un autre chasseur
-     * 
-     * Provisoire
-     * 
-     * @param h     le chasseur croisé
-     */
-	/*@Override
-	public void process(Hunter h) {
-		h.dir = h.getRandDir();
-		h.move();
-	}*/
 }

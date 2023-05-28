@@ -52,7 +52,7 @@ public class Game { // Vue
         //printGrid(round);
         while(!finish){
         	while(pause) {
-        		wait(0.5);
+        		c.wait(0.5);
         	}
 
             c.gridUpdate();
@@ -68,7 +68,12 @@ public class Game { // Vue
         }
         //printGrid(round);
         c.getWindow().getFeed().append("-- FIN DU JEU --\n");
-        c.getWindow().getFeed().append(winner.getCol()+" gagne la partie --");
+        c.getWindow().getFeed().append(winner.getCol()+" gagne la partie --\n\n");
+        for(int i = 3; i>0; i--) {
+        	c.wait(1.0);
+        	c.getWindow().getFeed().append("Fermeture dans "+i+" seconde(s)\n");
+        }
+        c.getWindow().getScreen().dispose();
     }
 
     /** Vide d'abord le terminal puis affiche la grille
@@ -85,7 +90,7 @@ public class Game { // Vue
         System.out.println(g.toString());
         printInfo();
 
-        wait(0.5);
+        c.wait(0.5);
     }
 
     /** Notifie dans le terminal que l'un des chasseur
@@ -102,13 +107,6 @@ public class Game { // Vue
      * 
      * @param sec   le nombre de seconde a attendre
      */
-    public void wait(double sec){
-        try {
-            Thread.sleep((long)(sec*1000.0));
-        } catch (InterruptedException e) {
-            Thread.currentThread().interrupt();
-        }
-    }
 
     public void addInfo(String i) {
     	this.info.add(i);

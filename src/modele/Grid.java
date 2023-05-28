@@ -155,7 +155,7 @@ public class Grid { // Modele
 		boolean isPlaced = false;
 		while(!isPlaced) {
 			int lenWall = (int)(Math.random()*(LEN_WALL_MAX-LEN_WALL_MIN)+1+LEN_WALL_MIN);
-			boolean isVertical = Math.random() <= 0.5; // 1/2 chance
+			boolean isVertical = Math.random() < 0.5; // 1/2 chance
 			canBePlaced = true;
 			Position initPos = Position.randPos(2,Position.getMAX_HEIGHT()-3,2,Position.getMAX_WIDTH()-3);
 			if(isStoneValid(initPos)) {
